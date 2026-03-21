@@ -7,8 +7,6 @@ import Write from "./pages/Write";
 import Detail from "./pages/Detail";
 import Edit from "./pages/Edit";
 
-import PrivateRoute from "./components/PrivateRoute";
-
 function App() {
   return (
     <BrowserRouter>
@@ -16,52 +14,18 @@ function App() {
         <Route path="/" element={<Navigate to="/login" />} />
 
         <Route path="/register" element={<Register />} />
+
         <Route path="/login" element={<Login />} />
 
-        <Route
-          path="/home"
-          element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/home" element={<Home />} />
 
-        <Route
-          path="/board"
-          element={
-            <PrivateRoute>
-              <Board />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/board" element={<Board />} />
 
-        <Route
-          path="/board/write"
-          element={
-            <PrivateRoute>
-              <Write />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/board/write" element={<Write />} />
 
-        <Route
-          path="/board/:id"
-          element={
-            <PrivateRoute>
-              <Detail />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/board/:id" element={<Detail />} />
 
-        <Route
-          path="/board/edit/:id"
-          element={
-            <PrivateRoute>
-              <Edit />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/board/edit/:id" element={<Edit />} />
       </Routes>
     </BrowserRouter>
   );
