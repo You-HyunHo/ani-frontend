@@ -4,7 +4,7 @@ function useAuth() {
   const [isLogin, setIsLogin] = useState(null);
 
   useEffect(() => {
-    fetch("ani-5.onrender.com/api/user/me", {
+    fetch("https://ani-5.onrender.com/api/user/me", {
       credentials: "include",
       redirect: "manual",
     })

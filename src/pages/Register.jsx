@@ -24,7 +24,7 @@ function Register() {
     console.log("보내는 값:", form);
 
     try {
-      const res = await fetch("ani-5.onrender.com/api/user/register", {
+      const res = await fetch("https://ani-5.onrender.com/api/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
