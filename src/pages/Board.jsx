@@ -4,7 +4,7 @@ function Board() {
   const [boards, setBoards] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/board", {
+    fetch("https://ani-5.onrender.com/api/board", {
       credentials: "include",
     })
       .then((res) => res.json())
@@ -12,7 +12,7 @@ function Board() {
   }, []);
 
   const handleDelete = async (id) => {
-    await fetch(`http://localhost:8080/api/board/${id}`, {
+    await fetch(`https://ani-5.onrender.com/api/board/${id}`, {
       method: "DELETE",
       credentials: "include",
     });
@@ -27,7 +27,7 @@ function Board() {
 
       <button
         onClick={async () => {
-          await fetch("http://localhost:8080/logout", {
+          await fetch("https://ani-5.onrender.com/logout", {
             method: "POST",
             credentials: "include",
           });
