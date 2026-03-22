@@ -25,7 +25,7 @@ function Home() {
           <a href="/mypage">마이페이지</a>
         </li>
         <li>
-          <a href="/anime">애니메이션검색</a>
+          <a href="/animesearch">애니메이션검색</a>
         </li>
       </ul>
 

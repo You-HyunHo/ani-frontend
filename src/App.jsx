@@ -6,6 +6,9 @@ import Board from "./pages/Board";
 import Write from "./pages/Write";
 import Detail from "./pages/Detail";
 import Edit from "./pages/Edit";
+import AnimeSearch from "./pages/AnimeSearch";
+import AnimeResult from "./pages/AnimeResult";
+import AnimeDetail from "./pages/AnimeDetail";
 
 function App() {
   return (
@@ -26,6 +29,12 @@ function App() {
         <Route path="/board/:id" element={<Detail />} />
 
         <Route path="/board/edit/:id" element={<Edit />} />
+
+        <Route path="/animesearch" element={<AnimeSearch />} />
+
+        <Route path="/result" element={<AnimeResult />} />
+
+        <Route path="/anime/:id" element={<AnimeDetail />} />
       </Routes>
     </BrowserRouter>
   );
