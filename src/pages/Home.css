@@ -1,0 +1,70 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 화면 중앙 정렬 */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flext-start;
+  height: 100vh;
+  padding : 40px;
+  background: #f0f2f5;
+}
+
+/* 제목 */
+.home-container h1 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+/* 메뉴 리스트 */
+.menu-list {
+  list-style: none;
+  width: 250px;
+  margin-bottom: 20px;
+}
+
+/* 메뉴 아이템 */
+.menu-list li {
+  margin-bottom: 12px;
+}
+
+/* 링크 버튼 스타일 */
+.menu-list a {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  padding: 12px;
+  border-radius: 10px;
+  background: #4CAF50;
+  color: white;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+/* hover 효과 */
+.menu-list a:hover {
+  background: #45a049;
+  transform: scale(1.03);
+}
+
+/* 로그아웃 버튼 */
+.logout-btn {
+  width: 250px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #f44336;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.logout-btn:hover {
+  background: #d32f2f;
+}

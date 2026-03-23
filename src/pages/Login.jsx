@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
+
 
 function Login() {
   const [form, setForm] = useState({
@@ -44,30 +46,35 @@ function Login() {
   };
 
   return (
-    <div>
-      <h2>로그인</h2>
+    <div className = "container">
+      <div className = "login-box">
+        <h2>로그인</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="username"
-          placeholder="아이디"
-          onChange={handleChange}
-          required
-        />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="username"
+            placeholder="아이디"
+            onChange={handleChange}
+            required
+          />
 
-        <input
-          type="password"
-          name="password"
-          placeholder="비밀번호"
-          onChange={handleChange}
-          required
-        />
+          <input
+            type="password"
+            name="password"
+            placeholder="비밀번호"
+            onChange={handleChange}
+            required
+          />
 
-        <button type="submit">로그인</button>
-      </form>
+          <button type="submit">로그인</button>
+        </form>
 
-      <button onClick={() => navigate("/register")}>회원가입</button>
+        <button 
+        className="register-btn"
+        onClick={() => navigate("/register")}>회원가입
+        </button>
+      </div>
     </div>
   );
 }

@@ -8,8 +8,8 @@ function Write() {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // 폼 기본 제출 막기
-
-    await fetch("https://ani-5.onrender.com/api/board", {
+    try{
+    const res = await fetch("https://ani-5.onrender.com/api/board", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -21,8 +21,24 @@ function Write() {
       }),
     });
 
+    if(!res.ok){
+      const text = await res.text();
+      console.error("글 등록 실패 :",text);
+      alert("글등록실패 서버확인필요");
+      return;
+    }
+
+    const data = await res.json();
+    console.log("등록 성공",data);
+    alert("글 등록 완료!");
+
+
     navigate("/board"); // 작성 후 목록으로 이동
-  };
+  } catch(err){
+    console.error("글 등록 중 오류발생:", err);
+    alert("서버와 연결실패");
+  }
+};
 
   return (
     <div>

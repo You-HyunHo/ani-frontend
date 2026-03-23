@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-
+import "./Home.css";
 function Home() {
   const navigate = useNavigate();
 
@@ -14,10 +14,10 @@ function Home() {
   };
 
   return (
-    <div>
+    <div className="home-container">
       <h1>메인 메뉴</h1>
 
-      <ul>
+      <ul className="menu-list">
         <li>
           <a href="/board">게시판</a>
         </li>
@@ -29,7 +29,7 @@ function Home() {
         </li>
       </ul>
 
-      <button onClick={handleLogout}>로그아웃</button>
+      <button className="logout-btn"onClick={handleLogout}>로그아웃</button>
     </div>
   );
 }
