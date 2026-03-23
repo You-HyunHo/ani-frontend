@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
-
 function Login() {
   const [form, setForm] = useState({
     username: "",
@@ -22,7 +21,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://ani-5.onrender.com/login", {
+      const res = await fetch("https://ani-5.onrender.co/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -46,8 +45,8 @@ function Login() {
   };
 
   return (
-    <div className = "container">
-      <div className = "login-box">
+    <div className="container">
+      <div className="login-box">
         <h2>로그인</h2>
 
         <form onSubmit={handleSubmit}>
@@ -70,9 +69,8 @@ function Login() {
           <button type="submit">로그인</button>
         </form>
 
-        <button 
-        className="register-btn"
-        onClick={() => navigate("/register")}>회원가입
+        <button className="register-btn" onClick={() => navigate("/register")}>
+          회원가입
         </button>
       </div>
     </div>

@@ -16,7 +16,7 @@ export default function AnimeResult() {
     const query = searchParams.toString();
 
     const res = await fetch(
-      `https://ani-5.onrender.com/api/anime/search?${query}`
+      `https://ani-5.onrender.co/api/anime/search?${query}`
     );
 
     const result = await res.json();
@@ -92,6 +92,7 @@ export default function AnimeResult() {
           <>
             {endPage < lastPage - 1 && <span> ... </span>}
             <button onClick={() => changePage(lastPage)}>{lastPage}</button>
+            <button onClick={() => navigate("/home")}>홈으로</button>
           </>
         )}
       </div>

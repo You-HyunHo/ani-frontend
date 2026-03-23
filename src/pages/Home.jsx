@@ -4,7 +4,7 @@ function Home() {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await fetch("https://ani-5.onrender.com/logout", {
+    await fetch("https://ani-5.onrender.co/logout", {
       method: "POST",
       credentials: "include",
     });
@@ -29,7 +29,9 @@ function Home() {
         </li>
       </ul>
 
-      <button className="logout-btn"onClick={handleLogout}>로그아웃</button>
+      <button className="logout-btn" onClick={handleLogout}>
+        로그아웃
+      </button>
     </div>
   );
 }

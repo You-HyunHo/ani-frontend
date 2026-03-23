@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 function Board() {
   const [boards, setBoards] = useState([]);
-  const [loginUser,setLoginUser] = useState("");
+  const [loginUser, setLoginUser] = useState("");
 
-  const fetchBoards = async()=>{
-    const res = await fetch("https://ani-5.onrender.com/api/board", {
+  const fetchBoards = async () => {
+    const res = await fetch("https://ani-5.onrender.co/api/board", {
       credentials: "include",
     });
     const data = await res.json();
@@ -13,31 +13,30 @@ function Board() {
   };
 
   useEffect(() => {
-  fetchBoards();
-
-  fetch("https://ani-5.onrender.com/api/user/me", {
-    credentials: "include",
-  })
-    .then((res) => {
-      if (!res.ok) {
-        return null;
-      }
-      return res.json();
+    fetchBoards();
+    fetch("https://ani-5.onrender.co/api/user/me", {
+      credentials: "include",
     })
-    .then((data) => {
-      if (data) {
-        setLoginUser(data.username);
-      }
-    })
-    .catch((err) => {
-      console.error("유저정보부르기 실패", err);
-    });
-}, []);
+      .then((res) => {
+        if (!res.ok) {
+          return null;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (data) {
+          setLoginUser(data.username);
+        }
+      })
+      .catch((err) => {
+        console.error("유저정보부르기 실패", err);
+      });
+  }, []);
 
   const handleDelete = async (id) => {
-    if(!window.confirm("진짜 삭제하노?")) return;
+    if (!window.confirm("진짜 삭제하노?")) return;
 
-    const res = await fetch(`https://ani-5.onrender.com/api/board/${id}`, {
+    const res = await fetch(`https://ani-5.onrender.co/api/board/${id}`, {
       method: "DELETE",
       credentials: "include",
     });
@@ -60,7 +59,7 @@ function Board() {
 
       <button
         onClick={async () => {
-          await fetch("https://ani-5.onrender.com/logout", {
+          await fetch("https://ani-5.onrender.co/logout", {
             method: "POST",
             credentials: "include",
           });
@@ -90,10 +89,8 @@ function Board() {
               </td>
               <td>{board.user.username}</td>
               <td>
-                {board.user.username===loginUser &&(
-                  <button onClick={() => handleDelete(board.id)}>
-                    삭제
-                  </button>
+                {board.user.username === loginUser && (
+                  <button onClick={() => handleDelete(board.id)}>삭제</button>
                 )}
               </td>
             </tr>

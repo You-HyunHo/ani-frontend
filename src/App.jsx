@@ -9,6 +9,7 @@ import Edit from "./pages/Edit";
 import AnimeSearch from "./pages/AnimeSearch";
 import AnimeResult from "./pages/AnimeResult";
 import AnimeDetail from "./pages/AnimeDetail";
+import MyPage from "./pages/MyPage";
 
 function App() {
   return (
@@ -35,6 +36,8 @@ function App() {
         <Route path="/result" element={<AnimeResult />} />
 
         <Route path="/anime/:id" element={<AnimeDetail />} />
+
+        <Route path="/mypage" element={<MyPage />} />
       </Routes>
     </BrowserRouter>
   );

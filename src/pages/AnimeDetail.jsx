@@ -12,7 +12,7 @@ export default function AnimeDetail() {
   // 🔥 상세 조회
   useEffect(() => {
     const fetchDetail = async () => {
-      const res = await fetch(`https://ani-5.onrender.com/api/anime/${id}`);
+      const res = await fetch(`https://ani-5.onrender.co/api/anime/${id}`);
       const data = await res.json();
 
       setAnime(data.anime);
@@ -28,21 +28,21 @@ export default function AnimeDetail() {
 
   // 🔥 평점 등록
   const handleSubmit = async () => {
-    await fetch("https://ani-5.onrender.com/rate", {
+    const res = await fetch("https://ani-5.onrender.co/rate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({
         malId: id,
         score: score,
       }),
     });
 
-    alert("평점 등록 완료");
+    const result = await res.json();
 
-    // 다시 불러오기
-    window.location.reload();
+    setRating({ score: result.score }); // 🔥 바로 반영
   };
 
   if (!anime) return <div>로딩중...</div>;
