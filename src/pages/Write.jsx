@@ -9,7 +9,7 @@ function Write() {
   const handleSubmit = async (e) => {
     e.preventDefault(); // 폼 기본 제출 막기
     try {
-      const res = await fetch("https://ani-5.onrender.co/api/board", {
+      const res = await fetch("https://ani-5.onrender.com/api/board", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

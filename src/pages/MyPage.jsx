@@ -8,7 +8,7 @@ export default function MyPage() {
   useEffect(() => {
     const fetchMyPage = async () => {
       try {
-        const res = await fetch("https://ani-5.onrender.co/api/mypage", {
+        const res = await fetch("https://ani-5.onrender.com/api/mypage", {
           credentials: "include",
         });
 

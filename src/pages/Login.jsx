@@ -21,7 +21,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://ani-5.onrender.co/login", {
+      const res = await fetch("https://ani-5.onrender.com/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",

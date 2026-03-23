@@ -7,7 +7,7 @@ function Detail() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`https://ani-5.onrender.co/api/board/${id}`, {
+    fetch(`https://ani-5.onrender.com/api/board/${id}`, {
       credentials: "include",
     })
       .then((res) => res.json())
@@ -15,7 +15,7 @@ function Detail() {
   }, [id]);
 
   const handleDelete = async () => {
-    await fetch(`https://ani-5.onrender.co/api/board/${id}`, {
+    await fetch(`https://ani-5.onrender.com/api/board/${id}`, {
       method: "DELETE",
       credentials: "include",
     });

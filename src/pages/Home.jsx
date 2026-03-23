@@ -4,7 +4,7 @@ function Home() {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await fetch("https://ani-5.onrender.co/logout", {
+    await fetch("https://ani-5.onrender.com/logout", {
       method: "POST",
       credentials: "include",
     });
