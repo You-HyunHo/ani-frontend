@@ -13,6 +13,15 @@ function Home() {
     navigate("/login");
   };
 
+  const handleFetchAll = async () => {
+    const res = await fetch("https://ani-5.onrender.com/api/fetch-all", {
+      credentials: "include",
+    });
+
+    const data = await res.json();
+    alert(data.message);
+  };
+
   return (
     <div className="home-container">
       <h1>메인 메뉴</h1>
@@ -32,6 +41,7 @@ function Home() {
       <button className="logout-btn" onClick={handleLogout}>
         로그아웃
       </button>
+      <button onClick={handleFetchAll}>애니 DB 채우기</button>
     </div>
   );
 }
