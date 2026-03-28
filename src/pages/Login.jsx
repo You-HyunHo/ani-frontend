@@ -23,21 +23,27 @@ function Login() {
     try {
       const res = await fetch("https://ani-5.onrender.com/login", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({
           username: form.username,
           password: form.password,
-        }), // ⭐ Spring Security 맞춤
-        credentials: "include", // ⭐ 세션 유지
+        }),
       });
 
-      if (res.ok) {
-        alert("로그인 성공");
-        navigate("/home");
-      } else {
+      if (!res.ok) {
         alert("아이디 또는 비밀번호 오류");
+        return;
+      }
+
+      const user = await res.json(); // 🔥 바로 받음
+
+      if (user.firstLogin) {
+        navigate("/onboarding");
+      } else {
+        navigate("/home");
       }
     } catch (err) {
       console.error(err);

@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function MyPage() {
   const [animeList, setAnimeList] = useState([]);
+  const hasFetched = useRef(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (hasFetched.current) return; // 🔥 두 번째 실행 막기
+    hasFetched.current = true;
+
     const fetchMyPage = async () => {
       try {
         const res = await fetch("https://ani-5.onrender.com/api/mypage", {
@@ -15,10 +19,7 @@ export default function MyPage() {
         if (!res.ok) return;
 
         const data = await res.json();
-
-        if (data.length > 0) {
-          setAnimeList(data); // 🔥 빈 배열이면 덮어쓰지 않음
-        }
+        setAnimeList(data);
       } catch (e) {
         console.error(e);
       }
@@ -26,6 +27,8 @@ export default function MyPage() {
 
     fetchMyPage();
   }, []);
+
+  console.log(animeList);
 
   return (
     <div>

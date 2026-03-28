@@ -10,6 +10,7 @@ import AnimeSearch from "./pages/AnimeSearch";
 import AnimeResult from "./pages/AnimeResult";
 import AnimeDetail from "./pages/AnimeDetail";
 import MyPage from "./pages/MyPage";
+import Onboarding from "./pages/Onboarding";
 
 function App() {
   return (
@@ -38,6 +39,8 @@ function App() {
         <Route path="/anime/:id" element={<AnimeDetail />} />
 
         <Route path="/mypage" element={<MyPage />} />
+
+        <Route path="/onboarding" element={<Onboarding />} />
       </Routes>
     </BrowserRouter>
   );
