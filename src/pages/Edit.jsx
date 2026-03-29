@@ -10,7 +10,7 @@ function Edit() {
 
   // 기존 데이터 불러오기
   useEffect(() => {
-    fetch(`https://ani-5.onrender.com/api/board/${id}`, {
+    fetch(`http://localhost:8080/api/board/${id}`, {
       credentials: "include",
     })
       .then((res) => res.json())
@@ -23,7 +23,7 @@ function Edit() {
   const handleUpdate = async (e) => {
     e.preventDefault();
 
-    await fetch(`https://ani-5.onrender.com/api/board/${id}`, {
+    await fetch(`http://localhost:8080/api/board/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

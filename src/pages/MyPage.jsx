@@ -12,7 +12,7 @@ export default function MyPage() {
 
     const fetchMyPage = async () => {
       try {
-        const res = await fetch("https://ani-5.onrender.com/api/mypage", {
+        const res = await fetch("http://localhost:8080/api/mypage", {
           credentials: "include",
         });
 
