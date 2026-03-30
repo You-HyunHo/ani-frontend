@@ -12,7 +12,7 @@ export default function AnimeDetail() {
   // 🔥 상세 조회
   useEffect(() => {
     const fetchDetail = async () => {
-      const res = await fetch(`http://localhost:8080/api/anime/${id}`);
+      const res = await fetch(`https://ani-5.onrender.com/api/anime/${id}`);
       const data = await res.json();
 
       setAnime(data.anime);
@@ -28,7 +28,7 @@ export default function AnimeDetail() {
 
   // 🔥 평점 등록
   const handleSubmit = async () => {
-    const res = await fetch("http://localhost:8080/rate", {
+    const res = await fetch("https://ani-5.onrender.com/rate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

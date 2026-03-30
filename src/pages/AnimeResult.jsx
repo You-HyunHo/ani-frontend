@@ -15,7 +15,9 @@ export default function AnimeResult() {
   const fetchData = async () => {
     const query = searchParams.toString();
 
-    const res = await fetch(`http://localhost:8080/api/anime/search?${query}`);
+    const res = await fetch(
+      `https://ani-5.onrender.com/api/anime/search?${query}`
+    );
 
     const result = await res.json();
 
