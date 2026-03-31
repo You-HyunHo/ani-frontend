@@ -56,6 +56,7 @@ function Board() {
       <h1>📌 게시판</h1>
 
       <a href="board/write">글쓰기</a>
+      <a href="home">메인으로</a>
 
       <button
         onClick={async () => {

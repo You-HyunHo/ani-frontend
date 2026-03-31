@@ -9,6 +9,21 @@ export default function AnimeDetail() {
   const [rating, setRating] = useState(null);
   const [score, setScore] = useState(1);
 
+  const [reviews, setReviews] = useState([]);
+  const [content, setContent] = useState("");
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const [editingId, setEditingId] = useState(null);
+  const [editContent, setEditContent] = useState("");
+
+  const fetchReviews = () => {
+    fetch(`https://ani-5.onrender.com/api/review/${id}`, {
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((data) => setReviews(data));
+  };
+
   // 🔥 상세 조회
   useEffect(() => {
     const fetchDetail = async () => {
@@ -24,6 +39,16 @@ export default function AnimeDetail() {
     };
 
     fetchDetail();
+
+    // 로그인 유저
+    fetch("https://ani-5.onrender.com/api/user/me", {
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((data) => setCurrentUser(data.username))
+      .catch(() => setCurrentUser(null));
+
+    fetchReviews();
   }, [id]);
 
   // 🔥 평점 등록
@@ -43,6 +68,53 @@ export default function AnimeDetail() {
     const result = await res.json();
 
     setRating({ score: result.score }); // 🔥 바로 반영
+  };
+
+  const handleReviewSubmit = async () => {
+    if (!content.trim()) return;
+
+    await fetch(`https://ani-5.onrender.com/api/review/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ content }),
+    });
+
+    setContent("");
+    fetchReviews();
+  };
+
+  const handleReviewDelete = async (reviewId) => {
+    await fetch(`https://ani-5.onrender.com/api/review/${reviewId}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+
+    fetchReviews();
+  };
+
+  const startEdit = (r) => {
+    setEditingId(r.id);
+    setEditContent(r.content);
+  };
+
+  const handleEditSubmit = async (reviewId) => {
+    if (!editContent.trim()) return;
+
+    await fetch(`https://ani-5.onrender.com/api/review/${reviewId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ content: editContent }),
+    });
+
+    setEditingId(null);
+    setEditContent("");
+    fetchReviews();
   };
 
   if (!anime) return <div>로딩중...</div>;
@@ -107,6 +179,46 @@ export default function AnimeDetail() {
       <br />
 
       <button onClick={() => navigate(-1)}>뒤로가기</button>
+
+      <hr />
+
+      <h3>리뷰</h3>
+
+      {reviews.map((r) => (
+        <div key={r.id}>
+          <b>{r.username}</b>:
+          {editingId === r.id ? (
+            <>
+              <input
+                value={editContent}
+                onChange={(e) => setEditContent(e.target.value)}
+              />
+              <button onClick={() => handleEditSubmit(r.id)}>저장</button>
+              <button onClick={() => setEditingId(null)}>취소</button>
+            </>
+          ) : (
+            <>
+              <span> {r.content}</span>
+
+              {currentUser === r.username && (
+                <>
+                  <button onClick={() => startEdit(r)}>수정</button>
+                  <button onClick={() => handleReviewDelete(r.id)}>삭제</button>
+                </>
+              )}
+            </>
+          )}
+        </div>
+      ))}
+
+      <hr />
+
+      <input
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        placeholder="리뷰 작성"
+      />
+      <button onClick={handleReviewSubmit}>리뷰 등록</button>
     </div>
   );
 }
