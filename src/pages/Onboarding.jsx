@@ -9,7 +9,7 @@ export default function Onboarding() {
 
   // 🔥 데이터 가져오기
   useEffect(() => {
-    fetch("https://ani-5.onrender.com/api/onboarding", {
+    fetch(" https://ani-5.onrender.com/api/onboarding", {
       credentials: "include",
     })
       .then((res) => res.json())
@@ -35,7 +35,7 @@ export default function Onboarding() {
 
   // 🔥 저장
   const handleSubmit = async () => {
-    await fetch("https://ani-5.onrender.com/api/onboarding/save", {
+    await fetch(" https://ani-5.onrender.com/api/onboarding/save", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

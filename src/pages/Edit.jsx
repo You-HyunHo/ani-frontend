@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import "../css/Edit.css";
 
 function Edit() {
   const { id } = useParams();
@@ -10,7 +11,7 @@ function Edit() {
 
   // 기존 데이터 불러오기
   useEffect(() => {
-    fetch(`https://ani-5.onrender.com/api/board/${id}`, {
+    fetch(` https://ani-5.onrender.com/api/board/${id}`, {
       credentials: "include",
     })
       .then((res) => res.json())
@@ -23,7 +24,7 @@ function Edit() {
   const handleUpdate = async (e) => {
     e.preventDefault();
 
-    await fetch(`https://ani-5.onrender.com/api/board/${id}`, {
+    await fetch(` https://ani-5.onrender.com/api/board/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +40,7 @@ function Edit() {
   };
 
   return (
-    <div>
+    <div className="edit-container">
       <h1>✏ 글 수정</h1>
 
       <form onSubmit={handleUpdate}>
@@ -61,10 +62,20 @@ function Edit() {
           />
         </div>
 
-        <button type="submit">수정 완료</button>
-      </form>
+        <div className="edit-actions">
+          <button type="submit" className="update-btn">
+            수정 완료
+          </button>
 
-      <button onClick={() => navigate(-1)}>취소</button>
+          <button
+            type="button"
+            className="cancel-btn"
+            onClick={() => navigate(-1)}
+          >
+            취소
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

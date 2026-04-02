@@ -1,0 +1,90 @@
+/* 전체 컨테이너 */
+.result-container {
+  width: 600px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+}
+
+/* 제목 */
+.result-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* 카드 */
+.anime-card {
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: 0.2s;
+}
+
+.anime-card:hover {
+  transform: translateY(-3px);
+}
+
+/* 이미지 */
+.anime-card img {
+  border-radius: 8px;
+  width: 120px;
+}
+
+/* 텍스트 영역 */
+.anime-info {
+  flex: 1;
+}
+
+/* 제목 */
+.anime-info h2 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+/* 링크 스타일 제거 */
+.anime-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 장르 */
+.anime-info p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* 페이징 */
+.pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* 버튼 */
+.pagination button {
+  margin: 0 4px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  background: #e5e7eb;
+  color: #111827; /* 👉 추가 (진한 글자색) */
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.pagination button:hover {
+  background: #d1d5db;
+  color: #000; /* 👉 hover 시 더 진하게 */
+}
+
+/* 현재 페이지 */
+.pagination strong {
+  margin: 0 6px;
+  font-weight: bold;
+  color: #4f46e5;
+  font-size: 16px; /* 👉 살짝 키우면 더 잘 보임 */
+}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
+import "../css/AnimeResult.css";
 
 export default function AnimeResult() {
   const [searchParams] = useSearchParams();
@@ -16,7 +17,7 @@ export default function AnimeResult() {
     const query = searchParams.toString();
 
     const res = await fetch(
-      `https://ani-5.onrender.com/api/anime/search?${query}`
+      ` https://ani-5.onrender.com/api/anime/search?${query}`
     );
 
     const result = await res.json();
@@ -43,28 +44,33 @@ export default function AnimeResult() {
   };
 
   return (
-    <div>
+    <div className="result-container">
       <h1>검색 결과</h1>
 
       {/* 🎬 리스트 */}
       {data.map((anime) => (
-        <div key={anime.mal_id}>
+        <div key={anime.mal_id} className="anime-card">
           <Link to={`/anime/${anime.mal_id}`}>
-            <h2>{anime.title}</h2>
-            <img src={anime.images.jpg.image_url} width="150" />
+            <img src={anime.images.jpg.image_url} />
           </Link>
 
-          <p>
-            <strong>장르:</strong> {anime.genres.map((g) => g.name).join(", ")}
-          </p>
+          <div className="anime-info">
+            <Link to={`/anime/${anime.mal_id}`}>
+              <h2>{anime.title}</h2>
+            </Link>
 
-          <p>평점: {anime.score}</p>
-          <hr />
+            <p>
+              <strong>장르:</strong>{" "}
+              {anime.genres.map((g) => g.name).join(", ")}
+            </p>
+
+            <p>⭐ 평점: {anime.score}</p>
+          </div>
         </div>
       ))}
 
       {/* 🔥 페이징 */}
-      <div>
+      <div className="pagination">
         {/* 처음 */}
         {startPage > 1 && (
           <>

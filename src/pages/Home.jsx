@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import "./Home.css";
+import "../css/Home.css";
 function Home() {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await fetch("https://ani-5.onrender.com/logout", {
+    await fetch(" https://ani-5.onrender.com/logout", {
       method: "POST",
       credentials: "include",
     });
@@ -14,7 +14,7 @@ function Home() {
   };
 
   const handleFetchAll = async () => {
-    const res = await fetch("https://ani-5.onrender.com/api/fetch-all", {
+    const res = await fetch(" https://ani-5.onrender.com/api/fetch-all", {
       credentials: "include",
     });
 

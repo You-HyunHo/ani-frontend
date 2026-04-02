@@ -1,0 +1,74 @@
+/* 컨테이너 (글쓰기랑 동일하게 써도 됨) */
+.edit-container {
+  width: 500px;
+  margin: 60px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: Arial, sans-serif;
+}
+
+/* 제목 */
+.edit-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 입력 줄 */
+.edit-container form > div {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+/* input / textarea */
+.edit-container input,
+.edit-container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+/* textarea */
+.edit-container textarea {
+  resize: none;
+  min-height: 120px;
+}
+
+/* 포커스 */
+.edit-container input:focus,
+.edit-container textarea:focus {
+  border-color: #4f46e5;
+  outline: none;
+}
+
+/* 버튼 영역 */
+.edit-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+/* 수정 버튼 */
+.update-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #10b981; /* 👉 수정은 초록 */
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 취소 버튼 */
+.cancel-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #6b7280;
+  color: white;
+  cursor: pointer;
+}

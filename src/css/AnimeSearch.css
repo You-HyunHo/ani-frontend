@@ -1,0 +1,96 @@
+/* 전체 배경 */
+body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  background: #f3f4f6;
+}
+
+/* 전체 컨테이너 */
+.anime-container {
+  width: 420px;
+  margin: 60px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* 제목 */
+.anime-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 구분선 */
+.anime-container hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #eee;
+}
+
+/* input, select 공통 */
+.anime-container input,
+.anime-container select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+/* 줄 간격 */
+.anime-container > div {
+  margin-bottom: 12px;
+}
+
+/* label */
+.anime-container label {
+  font-size: 13px;
+  color: #555;
+}
+
+/* 필터 제목 */
+.anime-container h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* 체크박스 그룹 */
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap; /* 줄 넘치면 다음 줄 */
+  gap: 10px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #f9fafb;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap; /* 👉 글자 줄바꿈 방지 */
+}
+
+/* 버튼 */
+.anime-container button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #4f46e5;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.anime-container button:hover {
+  background: #4338ca;
+  transform: translateY(-1px);
+}

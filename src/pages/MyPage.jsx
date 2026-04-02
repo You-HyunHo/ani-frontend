@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import "../css/MyPage.css";
 
 export default function MyPage() {
   const [animeList, setAnimeList] = useState([]);
@@ -12,7 +13,7 @@ export default function MyPage() {
 
     const fetchMyPage = async () => {
       try {
-        const res = await fetch("https://ani-5.onrender.com/api/mypage", {
+        const res = await fetch(" https://ani-5.onrender.com/api/mypage", {
           credentials: "include",
         });
 
@@ -31,7 +32,7 @@ export default function MyPage() {
   console.log(animeList);
 
   return (
-    <div>
+    <div className="mypage-container">
       <h1>마이페이지</h1>
 
       <h2>내가 평가한 애니</h2>
@@ -39,22 +40,19 @@ export default function MyPage() {
       {animeList.length === 0 ? (
         <p>평가한 애니가 없습니다.</p>
       ) : (
-        animeList.map((anime) => (
-          <div key={anime.malId}>
-            {/* 🔥 클릭 시 상세 이동 */}
+        <div className="anime-grid">
+          {animeList.map((anime) => (
             <div
+              key={anime.malId}
+              className="anime-card"
               onClick={() => navigate(`/anime/${anime.malId}`)}
-              style={{ cursor: "pointer" }}
             >
-              <img src={anime.imageUrl} width="120" />
-              <p>{anime.title}</p>
+              <img src={anime.imageUrl} />
+              <p className="anime-title">{anime.title}</p>
+              <p className="anime-score">⭐ {anime.score}</p>
             </div>
-
-            <p>내가 준 평점: {anime.score}</p>
-
-            <hr />
-          </div>
-        ))
+          ))}
+        </div>
       )}
     </div>
   );

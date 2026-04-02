@@ -1,0 +1,78 @@
+/* 전체 컨테이너 */
+.write-container {
+  width: 500px;
+  margin: 60px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: Arial, sans-serif;
+}
+
+/* 제목 */
+.write-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 각 입력 줄 */
+.write-container form > div {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+/* input */
+.write-container input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+/* textarea */
+.write-container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  resize: none;
+  box-sizing: border-box;
+}
+
+/* 포커스 효과 */
+.write-container input:focus,
+.write-container textarea:focus {
+  border-color: #4f46e5;
+  outline: none;
+}
+
+/* 버튼 영역 */
+.write-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+/* 작성 버튼 */
+.submit-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #4f46e5;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 목록 버튼 */
+.list-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #6b7280;
+  color: white;
+  cursor: pointer;
+}

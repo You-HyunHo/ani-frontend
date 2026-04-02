@@ -1,0 +1,73 @@
+/* 전체 컨테이너 */
+.mypage-container {
+  width: 800px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+}
+
+/* 제목 */
+.mypage-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 서브 제목 */
+.mypage-container h2 {
+  margin-bottom: 15px;
+}
+
+/* 애니 리스트 (그리드 핵심🔥) */
+.anime-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 15px;
+}
+
+/* 카드 */
+.anime-card {
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.anime-card:hover {
+  transform: translateY(-4px);
+}
+
+/* 이미지 */
+.anime-card img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+}
+
+/* 제목 */
+.anime-card p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+/* 평점 */
+.anime-score {
+  font-size: 13px;
+  color: #4f46e5;
+  margin-top: 4px;
+}
+
+.anime-title {
+  font-weight: 500;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 👉 2줄 제한 */
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+}

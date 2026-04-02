@@ -1,0 +1,101 @@
+/* 전체 컨테이너 */
+.board-container {
+  width: 700px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+}
+
+/* 제목 */
+.board-container h1 {
+  margin-bottom: 15px;
+}
+
+/* 상단 메뉴 */
+.board-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* 왼쪽 링크 */
+.board-links a {
+  margin-right: 10px;
+  text-decoration: none;
+  color: #4f46e5;
+  font-weight: bold;
+}
+
+.board-links a:hover {
+  text-decoration: underline;
+}
+
+/* 로그아웃 버튼 */
+.board-container .logout-btn {
+  width: auto; /* 👉 이게 핵심 */
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 12px;
+  background: transparent;
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  border-radius: 5px;
+}
+
+.board-container .logout-btn:hover {
+  background: #ef4444;
+  color: white;
+}
+
+/* 테이블 */
+.board-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* 헤더 */
+.board-table thead {
+  background: #4f46e5;
+  color: white;
+}
+
+.board-table th {
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* 본문 */
+.board-table td {
+  padding: 10px;
+  text-align: center;
+  border-top: 1px solid #eee;
+}
+
+/* 제목 링크 */
+.board-table a {
+  text-decoration: none;
+  color: #111827;
+}
+
+.board-table a:hover {
+  color: #4f46e5;
+}
+
+/* 행 hover */
+.board-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* 삭제 버튼 */
+.delete-btn {
+  padding: 5px 8px;
+  border: none;
+  border-radius: 5px;
+  background: #ef4444;
+  color: white;
+  cursor: pointer;
+}

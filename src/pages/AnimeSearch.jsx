@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../css/AnimeSearch.css";
 
 export default function AnimeSearch() {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ export default function AnimeSearch() {
   };
 
   return (
-    <div>
+    <div className="anime-container">
       <h1>애니메이션 검색</h1>
 
       {/* 🔎 검색어 */}
@@ -131,28 +132,56 @@ export default function AnimeSearch() {
 
       {/* 🎭 장르 */}
       <h3>장르</h3>
-      <div>
-        <input type="checkbox" onChange={() => handleGenreChange("1")} /> 액션
-        <input type="checkbox" onChange={() => handleGenreChange("2")} /> 모험
-        <input type="checkbox" onChange={() => handleGenreChange("4")} /> 코미디
-        <input type="checkbox" onChange={() => handleGenreChange("8")} /> 드라마
-        <input type="checkbox" onChange={() => handleGenreChange("22")} />{" "}
-        로맨스
+      <div className="checkbox-group">
+        <label>
+          <input type="checkbox" onChange={() => handleGenreChange("1")} /> 액션
+        </label>
+        <label>
+          <input type="checkbox" onChange={() => handleGenreChange("2")} /> 모험
+        </label>
+        <label>
+          <input type="checkbox" onChange={() => handleGenreChange("4")} />{" "}
+          코미디
+        </label>
+        <label>
+          <input type="checkbox" onChange={() => handleGenreChange("8")} />{" "}
+          드라마
+        </label>
+        <label>
+          <input type="checkbox" onChange={() => handleGenreChange("22")} />{" "}
+          로맨스
+        </label>
       </div>
 
       <h3>테마</h3>
-      <div>
-        <input type="checkbox" onChange={() => handleGenreChange("62")} />{" "}
-        이세계
-        <input type="checkbox" onChange={() => handleGenreChange("23")} />{" "}
-        학원물
-        <input type="checkbox" onChange={() => handleGenreChange("40")} /> 심리
+      <div className="checkbox-group">
+        <label>
+          <input type="checkbox" onChange={() => handleGenreChange("62")} />
+          이세계
+        </label>
+
+        <label>
+          <input type="checkbox" onChange={() => handleGenreChange("23")} />
+          학원물
+        </label>
+
+        <label>
+          <input type="checkbox" onChange={() => handleGenreChange("40")} />
+          심리
+        </label>
       </div>
 
       <h3>독자층</h3>
-      <div>
-        <input type="checkbox" onChange={() => handleGenreChange("27")} /> 소년
-        <input type="checkbox" onChange={() => handleGenreChange("25")} /> 소녀
+      <div className="checkbox-group">
+        <label>
+          <input type="checkbox" onChange={() => handleGenreChange("27")} />
+          소년
+        </label>
+
+        <label>
+          <input type="checkbox" onChange={() => handleGenreChange("25")} />
+          소녀
+        </label>
       </div>
 
       <hr />

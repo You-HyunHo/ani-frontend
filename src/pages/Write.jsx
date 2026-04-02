@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../css/Write.css";
 
 function Write() {
   const [title, setTitle] = useState("");
@@ -9,7 +10,7 @@ function Write() {
   const handleSubmit = async (e) => {
     e.preventDefault(); // 폼 기본 제출 막기
     try {
-      const res = await fetch("https://ani-5.onrender.com/api/board", {
+      const res = await fetch(" https://ani-5.onrender.com/api/board", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,7 +41,7 @@ function Write() {
   };
 
   return (
-    <div>
+    <div className="write-container">
       <h1>✏ 글쓰기</h1>
 
       <form onSubmit={handleSubmit}>
@@ -56,22 +57,27 @@ function Write() {
 
         <div>
           내용:
-          <br />
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
             rows="5"
-            cols="40"
             required
           />
         </div>
 
-        <button type="submit">작성</button>
+        <div className="write-actions">
+          <button type="submit" className="submit-btn">
+            작성
+          </button>
+          <button
+            type="button"
+            className="list-btn"
+            onClick={() => navigate("/board")}
+          >
+            목록으로
+          </button>
+        </div>
       </form>
-
-      <br />
-
-      <button onClick={() => navigate("/board")}>목록으로</button>
     </div>
   );
 }

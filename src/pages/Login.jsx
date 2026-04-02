@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
+import "../css/Login.css";
 
 function Login() {
   const [form, setForm] = useState({
@@ -21,7 +21,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://ani-5.onrender.com/login", {
+      const res = await fetch(" https://ani-5.onrender.com/login", {
         method: "POST",
         credentials: "include",
         headers: {
