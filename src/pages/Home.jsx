@@ -4,7 +4,7 @@ function Home() {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await fetch(" https://ani-5.onrender.com/logout", {
+    await fetch("https://ani-5.onrender.com/logout", {
       method: "POST",
       credentials: "include",
     });
@@ -14,7 +14,7 @@ function Home() {
   };
 
   const handleFetchAll = async () => {
-    const res = await fetch(" https://ani-5.onrender.com/api/fetch-all", {
+    const res = await fetch("https://ani-5.onrender.com/api/fetch-all", {
       credentials: "include",
     });
 
@@ -35,6 +35,9 @@ function Home() {
         </li>
         <li>
           <a href="/animesearch">애니메이션검색</a>
+        </li>
+        <li>
+          <a href="/worldcup">애니이상형월드컵</a>
         </li>
       </ul>
 

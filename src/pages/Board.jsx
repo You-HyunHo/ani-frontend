@@ -6,7 +6,7 @@ function Board() {
   const [loginUser, setLoginUser] = useState("");
 
   const fetchBoards = async () => {
-    const res = await fetch(" https://ani-5.onrender.com/api/board", {
+    const res = await fetch("https://ani-5.onrender.com/api/board", {
       credentials: "include",
     });
     const data = await res.json();
@@ -17,7 +17,7 @@ function Board() {
     const load = async () => {
       await fetchBoards();
 
-      const res = await fetch(" https://ani-5.onrender.com/api/user/me", {
+      const res = await fetch("https://ani-5.onrender.com/api/user/me", {
         credentials: "include",
       });
 
@@ -33,7 +33,7 @@ function Board() {
   const handleDelete = async (id) => {
     if (!window.confirm("진짜 삭제하노?")) return;
 
-    const res = await fetch(` https://ani-5.onrender.com/api/board/${id}`, {
+    const res = await fetch(`https://ani-5.onrender.com/api/board/${id}`, {
       method: "DELETE",
       credentials: "include",
     });
@@ -61,7 +61,7 @@ function Board() {
         <button
           className="logout-btn"
           onClick={async () => {
-            await fetch(" https://ani-5.onrender.com/logout", {
+            await fetch("https://ani-5.onrender.com/logout", {
               method: "POST",
               credentials: "include",
             });

@@ -11,6 +11,7 @@ import AnimeResult from "./pages/AnimeResult";
 import AnimeDetail from "./pages/AnimeDetail";
 import MyPage from "./pages/MyPage";
 import Onboarding from "./pages/Onboarding";
+import Worldcup from "./pages/Worldcup";
 
 function App() {
   return (
@@ -41,6 +42,8 @@ function App() {
         <Route path="/mypage" element={<MyPage />} />
 
         <Route path="/onboarding" element={<Onboarding />} />
+
+        <Route path="/worldcup" element={<Worldcup />} />
       </Routes>
     </BrowserRouter>
   );

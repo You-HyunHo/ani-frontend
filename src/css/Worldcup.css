@@ -1,0 +1,191 @@
+.worldcup-container {
+  width: 100%;
+  height: 100vh;
+  background: #111;
+  color: white;
+  text-align: center;
+  position: relative;
+}
+
+.worldcup-battle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  height: calc(100vh - 80px);
+}
+
+.worldcup-card {
+  position: relative;
+  width: 560px;
+  height: 800px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.worldcup-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s;
+}
+
+.worldcup-card:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* 🔥 제목 오버레이 */
+.worldcup-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85),
+    rgba(0, 0, 0, 0.4),
+    transparent
+  );
+
+  display: flex;
+  align-items: flex-end;
+}
+
+.worldcup-overlay p {
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+/* 🔥 상단 텍스트 */
+.worldcup-top-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  z-index: 20;
+}
+
+.worldcup-top-overlay h1 {
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* 🔥 VS */
+.worldcup-vs {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  font-weight: bold;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* 🏆 우승 화면 */
+.winner-container {
+  height: 100vh;
+  background: #111;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.winner-card img {
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.winner-card p {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.start-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.start-box {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  width: 400px;
+  text-align: center;
+}
+
+.start-box h2 {
+  margin-bottom: 10px;
+}
+
+.start-box select {
+  width: 100%;
+  padding: 10px;
+  margin: 20px 0;
+  font-size: 16px;
+}
+
+.start-box button {
+  width: 100%;
+  padding: 12px;
+  background: #2db400;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.start-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.start-buttons button {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.result-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+  max-width: 300px;
+  margin-top: 20px;
+}
+
+.result-buttons button {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+}

@@ -17,7 +17,7 @@ export default function AnimeResult() {
     const query = searchParams.toString();
 
     const res = await fetch(
-      ` https://ani-5.onrender.com/api/anime/search?${query}`
+      `https://ani-5.onrender.com/api/anime/search?${query}`
     );
 
     const result = await res.json();

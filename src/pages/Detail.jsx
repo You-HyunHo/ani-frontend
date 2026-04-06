@@ -13,7 +13,7 @@ function Detail() {
   const [editContent, setEditContent] = useState("");
 
   const fetchComments = () => {
-    fetch(` https://ani-5.onrender.com/api/comment/${id}`, {
+    fetch(`https://ani-5.onrender.com/api/comment/${id}`, {
       credentials: "include",
     })
       .then((res) => res.json())
@@ -27,14 +27,14 @@ function Detail() {
 
   useEffect(() => {
     // 게시글 가져오기
-    fetch(` https://ani-5.onrender.com/api/board/${id}`, {
+    fetch(`https://ani-5.onrender.com/api/board/${id}`, {
       credentials: "include",
     })
       .then((res) => res.json())
       .then((data) => setBoard(data));
 
     // 현재 로그인 유저 가져오기
-    fetch(" https://ani-5.onrender.com/api/user/me", {
+    fetch("https://ani-5.onrender.com/api/user/me", {
       credentials: "include",
     })
       .then((res) => res.json())
@@ -45,7 +45,7 @@ function Detail() {
   }, [id]);
 
   const handleDelete = async () => {
-    await fetch(` https://ani-5.onrender.com/api/board/${id}`, {
+    await fetch(`https://ani-5.onrender.com/api/board/${id}`, {
       method: "DELETE",
       credentials: "include",
     });
@@ -56,7 +56,7 @@ function Detail() {
   const handleCommentSubmit = async () => {
     if (!content.trim()) return;
 
-    await fetch(` https://ani-5.onrender.com/api/comment/${id}`, {
+    await fetch(`https://ani-5.onrender.com/api/comment/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -70,7 +70,7 @@ function Detail() {
   };
 
   const handleCommentDelete = async (commentId) => {
-    await fetch(` https://ani-5.onrender.com/api/comment/${commentId}`, {
+    await fetch(`https://ani-5.onrender.com/api/comment/${commentId}`, {
       method: "DELETE",
       credentials: "include",
     });
@@ -81,7 +81,7 @@ function Detail() {
   const handleEditSubmit = async (commentId) => {
     if (!editContent.trim()) return;
 
-    await fetch(` https://ani-5.onrender.com/api/comment/${commentId}`, {
+    await fetch(`https://ani-5.onrender.com/api/comment/${commentId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

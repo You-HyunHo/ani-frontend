@@ -18,7 +18,7 @@ export default function AnimeDetail() {
   const [editContent, setEditContent] = useState("");
 
   const fetchReviews = () => {
-    fetch(` https://ani-5.onrender.com/api/review/${id}`, {
+    fetch(`https://ani-5.onrender.com/api/review/${id}`, {
       credentials: "include",
     })
       .then((res) => res.json())
@@ -28,7 +28,7 @@ export default function AnimeDetail() {
   // 🔥 상세 조회
   useEffect(() => {
     const fetchDetail = async () => {
-      const res = await fetch(` https://ani-5.onrender.com/api/anime/${id}`);
+      const res = await fetch(`https://ani-5.onrender.com/api/anime/${id}`);
       const data = await res.json();
 
       setAnime(data.anime);
@@ -42,7 +42,7 @@ export default function AnimeDetail() {
     fetchDetail();
 
     // 로그인 유저
-    fetch(" https://ani-5.onrender.com/api/user/me", {
+    fetch("https://ani-5.onrender.com/api/user/me", {
       credentials: "include",
     })
       .then((res) => res.json())
@@ -54,7 +54,7 @@ export default function AnimeDetail() {
 
   // 🔥 평점 등록
   const handleSubmit = async () => {
-    const res = await fetch(" https://ani-5.onrender.com/rate", {
+    const res = await fetch("https://ani-5.onrender.com/rate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export default function AnimeDetail() {
   const handleReviewSubmit = async () => {
     if (!content.trim()) return;
 
-    await fetch(` https://ani-5.onrender.com/api/review/${id}`, {
+    await fetch(`https://ani-5.onrender.com/api/review/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -88,7 +88,7 @@ export default function AnimeDetail() {
   };
 
   const handleReviewDelete = async (reviewId) => {
-    await fetch(` https://ani-5.onrender.com/api/review/${reviewId}`, {
+    await fetch(`https://ani-5.onrender.com/api/review/${reviewId}`, {
       method: "DELETE",
       credentials: "include",
     });
@@ -104,7 +104,7 @@ export default function AnimeDetail() {
   const handleEditSubmit = async (reviewId) => {
     if (!editContent.trim()) return;
 
-    await fetch(` https://ani-5.onrender.com/api/review/${reviewId}`, {
+    await fetch(`https://ani-5.onrender.com/api/review/${reviewId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
