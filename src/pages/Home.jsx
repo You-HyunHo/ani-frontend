@@ -39,6 +39,9 @@ function Home() {
         <li>
           <a href="/worldcup">애니이상형월드컵</a>
         </li>
+        <li>
+          <a href="/recommendations">애니추천</a>
+        </li>
       </ul>
 
       <button className="logout-btn" onClick={handleLogout}>
