@@ -94,3 +94,153 @@ body {
   background: #4338ca;
   transform: translateY(-1px);
 }
+
+/* 🔹 장르 선택 버튼 (기존 버튼이랑 살짝 다르게) */
+.genre-button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9fafb;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: left;
+}
+
+.genre-button:hover {
+  background: #eef2ff;
+}
+
+/* 🔹 선택된 장르 태그 */
+.selected-genres {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.selected-genres span {
+  background: #e0e7ff;
+  color: #3730a3;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.selected-genres span:hover {
+  background: #c7d2fe;
+}
+
+/* 🔹 모달 배경 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999;
+}
+
+/* 🔹 모달 내용 */
+.modal-content {
+  background: white;
+  width: 420px;
+  max-height: 80vh; /* 👉 화면 기준으로 */
+  padding: 20px;
+  border-radius: 12px;
+
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.modal-content input {
+  margin-bottom: 10px;
+}
+
+/* 🔹 장르 리스트 */
+.genre-list {
+  display: block;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.genre-list > div {
+  margin-bottom: 12px;
+}
+
+.genre-list h4 {
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #333;
+}
+
+.genre-list label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  background: #f9fafb;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+
+  font-size: 13px;
+}
+
+.genre-list label:hover {
+  background: #eef2ff;
+}
+
+/* 🔹 카테고리 내부 (가로 배치 유지) */
+.genre-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* 🔹 장르 아이템 */
+.genre-section label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  background: #f9fafb;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.genre-section label:hover {
+  background: #eef2ff;
+}
+
+/* 🔥 체크박스 색상 통일 */
+.genre-section input {
+  accent-color: #4f46e5;
+}
+
+/* 🔹 모달 버튼 고정 느낌 */
+.modal-buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+.modal-buttons button {
+  width: 48%;
+  margin-top: 0;
+}
