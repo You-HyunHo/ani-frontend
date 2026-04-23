@@ -29,6 +29,7 @@ export default function RecommendationPage() {
         if (!res.ok) throw new Error("추천 데이터를 불러오는데 실패했습니다.");
 
         const data = await res.json();
+        console.log("서버에서 온 실제 데이터:", data);
         setRecommendations(data);
       } catch (e) {
         console.error("추천 로직 오류:", e);
