@@ -1,0 +1,8 @@
+{
+  "title": "ログイン",
+  "username_placeholder": "ユーザー名",
+  "password_placeholder": "パスワード",
+  "login_button": "ログイン",
+  "register_button": "新規会員登録",
+  "login_error": "IDまたはパスワードが正しくありません"
+}

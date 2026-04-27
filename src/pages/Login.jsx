@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Login.css";
+import { useTranslation } from "react-i18next";
 
 function Login() {
+  const {t} = useTranslation('login');
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -34,7 +36,7 @@ function Login() {
       });
 
       if (!res.ok) {
-        alert("아이디 또는 비밀번호 오류");
+        alert(t('login_error'));
         return;
       }
 
@@ -53,13 +55,13 @@ function Login() {
   return (
     <div className="container">
       <div className="login-box">
-        <h2>로그인</h2>
+        <h2>{t('title')}</h2>
 
         <form onSubmit={handleSubmit}>
           <input
             type="text"
             name="username"
-            placeholder="아이디"
+            placeholder={t('username_placeholder')}
             onChange={handleChange}
             required
           />
@@ -67,16 +69,16 @@ function Login() {
           <input
             type="password"
             name="password"
-            placeholder="비밀번호"
+            placeholder={t('password_placeholder')}
             onChange={handleChange}
             required
           />
 
-          <button type="submit">로그인</button>
+          <button type="submit">{t('login_button')}</button>
         </form>
 
         <button className="register-btn" onClick={() => navigate("/register")}>
-          회원가입
+          {t('register_button')}
         </button>
       </div>
     </div>

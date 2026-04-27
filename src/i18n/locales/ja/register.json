@@ -1,0 +1,12 @@
+{
+    "title": "新規会員登録",
+  "username_placeholder": "ID",
+  "password_placeholder": "パスワード",
+  "age_placeholder": "年齢",
+  "gender_select": "性別を選択",
+  "male": "男性",
+  "female": "女性",
+  "submit_button": "登録する",
+  "success_msg": "会員登録が完了しました",
+  "network_error": "サーバーと通信できません。 ネットワーク接続を確認してください。"
+}

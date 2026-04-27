@@ -1,0 +1,12 @@
+{
+    "title": "회원가입",
+  "username_placeholder": "아이디",
+  "password_placeholder": "비밀번호",
+  "age_placeholder": "나이",
+  "gender_select": "성별 선택",
+  "male": "남자",
+  "female": "여자",
+  "submit_button": "가입하기",
+  "success_msg": "회원가입 완료",
+  "network_error": "서버와 통신할 수 없습니다. 네트워크 연결을 확인해주세요."
+}

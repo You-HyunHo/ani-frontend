@@ -1,0 +1,8 @@
+{
+  "title": "로그인",
+  "username_placeholder": "아이디",
+  "password_placeholder": "비밀번호",
+  "login_button": "로그인",
+  "register_button": "회원가입",
+  "login_error": "아이디 또는 비밀번호 오류"
+}

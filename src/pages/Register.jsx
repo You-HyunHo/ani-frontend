@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next"; // 1️⃣ import 추가
 import "../css/Register.css";
 
 function Register() {
+  const { t } = useTranslation('register'); // 2️⃣ 'register' 네임스페이스 사용
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -20,9 +22,7 @@ function Register() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // 페이지 새로고침 막기
-
-    console.log("보내는 값:", form);
+    e.preventDefault();
 
     try {
       const res = await fetch("https://ani-5.onrender.com/api/user/register", {
@@ -33,38 +33,37 @@ function Register() {
         body: JSON.stringify(form),
       });
 
-      // ⭐ 수정 포인트 1: 서버의 응답이 성공(200~299)인지 확인
       if (res.ok) {
-        const data = await res.text(); // "회원가입 성공" 문자열 읽기
+        const data = await res.text();
         console.log("성공 응답:", data);
-        alert("회원가입 완료");
+        alert(t('success_msg')); // 3️⃣ 성공 메시지 다국어화
         navigate("/login");
       } 
-      // ⭐ 수정 포인트 2: 서버에서 에러(400 등)를 보낸 경우 메시지 추출
       else {
-        const errorMsg = await res.text(); // 백엔드 e.getMessage() 문자열 읽기
+        // 서버에서 던지는 에러 메시지(e.getMessage())는 
+        // 백엔드에서 번역해서 보내지 않는 이상 그대로 출력됩니다.
+        const errorMsg = await res.text();
         console.error("에러 발생:", errorMsg);
-        alert(errorMsg); // "이미 존재하는 아이디입니다." 알림창 띄우기
+        alert(errorMsg); 
       }
 
     } catch (err) {
-      // ⭐ 수정 포인트 3: 네트워크 연결 자체가 끊겼을 때의 예외 처리
       console.error("네트워크 에러:", err);
-      alert("서버와 통신할 수 없습니다. 네트워크 연결을 확인해주세요.");
+      alert(t('network_error')); // 4️⃣ 네트워크 에러 다국어화
     }
   };
 
   return (
     <div className="signup-container">
-      <h2>회원가입</h2>
+      <h2>{t('title')}</h2> {/* 5️⃣ 제목 */}
 
       <form onSubmit={handleSubmit}>
         <div>
           <input
             type="text"
             name="username"
-            placeholder="아이디"
-            value={form.username} // 상태 관리 안정성을 위해 value 추가
+            placeholder={t('username_placeholder')} // 6️⃣ 아이디
+            value={form.username}
             onChange={handleChange}
             required
           />
@@ -74,7 +73,7 @@ function Register() {
           <input
             type="password"
             name="password"
-            placeholder="비밀번호"
+            placeholder={t('password_placeholder')} // 7️⃣ 비밀번호
             value={form.password}
             onChange={handleChange}
             required
@@ -85,7 +84,7 @@ function Register() {
           <input
             type="number"
             name="age"
-            placeholder="나이"
+            placeholder={t('age_placeholder')} // 8️⃣ 나이
             value={form.age}
             onChange={handleChange}
             required
@@ -94,14 +93,14 @@ function Register() {
 
         <div>
           <select name="gender" value={form.gender} onChange={handleChange} required>
-            <option value="">성별 선택</option>
-            <option value="MALE">남자</option>
-            <option value="FEMALE">여자</option>
+            <option value="">{t('gender_select')}</option> {/* 9️⃣ 성별 선택 */}
+            <option value="MALE">{t('male')}</option>
+            <option value="FEMALE">{t('female')}</option>
           </select>
         </div>
 
         <div>
-          <button type="submit">가입하기</button>
+          <button type="submit">{t('submit_button')}</button> {/* 🔟 가입 버튼 */}
         </div>
       </form>
     </div>

@@ -13,9 +13,12 @@ import MyPage from "./pages/MyPage";
 import Onboarding from "./pages/Onboarding";
 import Worldcup from "./pages/Worldcup";
 import RecommendationPage from "./pages/RecommendationPage";
+import LanguageSwitcher from "./components/LanguageSwitcher";
 function App() {
   return (
+    
     <BrowserRouter>
+      <LanguageSwitcher />
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
 
