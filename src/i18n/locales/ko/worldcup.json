@@ -1,0 +1,14 @@
+{
+  "title": "애니 이상형 월드컵",
+  "start": "시작하기",
+  "home": "홈으로",
+
+  "round": "{{size}}강",
+  "final": "결승",
+
+  "winner": "우승!",
+  "restart": "다시 하기",
+
+  "loading": "로딩중...",
+  "vs": "VS"
+}

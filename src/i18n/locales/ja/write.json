@@ -1,0 +1,20 @@
+{
+  "title": "投稿作成",
+
+  "label": {
+    "title": "タイトル",
+    "content": "内容"
+  },
+
+  "placeholder": {
+    "title": "タイトルを入力してください",
+    "content": "内容を入力してください"
+  },
+
+  "submit": "投稿",
+  "backToList": "一覧へ",
+
+  "successSubmit": "投稿完了！",
+  "errorSubmit": "投稿失敗（サーバー確認が必要）",
+  "serverError": "サーバー接続失敗"
+}

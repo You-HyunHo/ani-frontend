@@ -1,0 +1,20 @@
+{
+  "title": "글쓰기",
+
+  "label": {
+    "title": "제목",
+    "content": "내용"
+  },
+
+  "placeholder": {
+    "title": "제목을 입력하세요",
+    "content": "내용을 입력하세요"
+  },
+
+  "submit": "작성",
+  "backToList": "목록으로",
+
+  "successSubmit": "글 등록 완료!",
+  "errorSubmit": "글 등록 실패 (서버 확인 필요)",
+  "serverError": "서버와 연결 실패"
+}

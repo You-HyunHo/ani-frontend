@@ -1,0 +1,10 @@
+{
+  "title": "アニメの好み選択",
+  "watched": "視聴済み",
+  "noSelect": "未選択",
+  "save": "保存",
+
+  "errorNoScore": "評価を選択してください。",
+  "errorNotWatched": "『視聴済み』をチェックしてください。",
+  "success": "保存完了！"
+}

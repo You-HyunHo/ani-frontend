@@ -1,0 +1,13 @@
+{
+  "title": "메인 메뉴",
+  "menu": {
+    "board": "게시판",
+    "mypage": "마이페이지",
+    "search": "애니메이션 검색",
+    "worldcup": "애니 이상형 월드컵",
+    "recommend": "애니 추천"
+  },
+  "logout": "로그아웃",
+  "logoutAlert": "로그아웃되었습니다.",
+  "fillDB": "애니 DB 채우기"
+}

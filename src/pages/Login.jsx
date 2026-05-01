@@ -4,7 +4,7 @@ import "../css/Login.css";
 import { useTranslation } from "react-i18next";
 
 function Login() {
-  const {t} = useTranslation('login');
+  const { t } = useTranslation("login");
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -36,7 +36,7 @@ function Login() {
       });
 
       if (!res.ok) {
-        alert(t('login_error'));
+        alert(t("login_error"));
         return;
       }
 
@@ -55,13 +55,13 @@ function Login() {
   return (
     <div className="container">
       <div className="login-box">
-        <h2>{t('title')}</h2>
+        <h2>{t("title")}</h2>
 
         <form onSubmit={handleSubmit}>
           <input
             type="text"
             name="username"
-            placeholder={t('username_placeholder')}
+            placeholder={t("username_placeholder")}
             onChange={handleChange}
             required
           />
@@ -69,16 +69,16 @@ function Login() {
           <input
             type="password"
             name="password"
-            placeholder={t('password_placeholder')}
+            placeholder={t("password_placeholder")}
             onChange={handleChange}
             required
           />
 
-          <button type="submit">{t('login_button')}</button>
+          <button type="submit">{t("login_button")}</button>
         </form>
 
         <button className="register-btn" onClick={() => navigate("/register")}>
-          {t('register_button')}
+          {t("register_button")}
         </button>
       </div>
     </div>

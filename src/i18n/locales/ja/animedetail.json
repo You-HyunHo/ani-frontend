@@ -1,0 +1,26 @@
+{
+  "loading": "読み込み中...",
+  "no_title": "タイトルなし",
+  "no_image": "画像なし",
+  "no_info": "情報なし",
+
+  "type": "タイプ",
+  "status": "放送状態",
+  "rating": "年齢制限",
+  "score": "スコア",
+
+  "genre": "ジャンル",
+  "theme": "テーマ",
+  "demographic": "対象",
+
+  "my_score": "マイスコア",
+  "submit": "登録",
+  "back": "戻る",
+
+  "review": "レビュー",
+  "write_review": "レビューを書く",
+  "edit": "修正",
+  "delete": "削除",
+  "save": "保存",
+  "cancel": "キャンセル"
+}

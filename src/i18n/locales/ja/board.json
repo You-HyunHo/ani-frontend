@@ -1,0 +1,18 @@
+{
+  "title": "掲示板",
+  "write": "投稿する",
+  "home": "ホームへ",
+  "logout": "ログアウト",
+
+  "confirmDelete": "本当に削除しますか？",
+  "deleteSuccess": "削除完了",
+
+  "table": {
+    "id": "番号",
+    "title": "タイトル",
+    "author": "作成者",
+    "delete": "削除"
+  },
+
+  "deleteBtn": "削除"
+}

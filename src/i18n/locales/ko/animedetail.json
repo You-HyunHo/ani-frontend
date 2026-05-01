@@ -1,0 +1,26 @@
+{
+  "loading": "로딩중...",
+  "no_title": "제목 없음",
+  "no_image": "이미지 없음",
+  "no_info": "정보 없음",
+
+  "type": "타입",
+  "status": "방영 여부",
+  "rating": "시청 연령",
+  "score": "평점",
+
+  "genre": "장르",
+  "theme": "테마",
+  "demographic": "독자층",
+
+  "my_score": "내 평점",
+  "submit": "등록",
+  "back": "뒤로가기",
+
+  "review": "리뷰",
+  "write_review": "리뷰 작성",
+  "edit": "수정",
+  "delete": "삭제",
+  "save": "저장",
+  "cancel": "취소"
+}

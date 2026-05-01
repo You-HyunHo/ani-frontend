@@ -1,0 +1,10 @@
+{
+  "title": "애니메이션 취향 선택",
+  "watched": "봤어요",
+  "noSelect": "선택 안함",
+  "save": "저장",
+
+  "errorNoScore": "평점을 선택해주세요.",
+  "errorNotWatched": "'봤어요'를 체크해주세요.",
+  "success": "저장 완료!"
+}

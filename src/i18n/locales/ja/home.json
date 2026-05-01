@@ -1,0 +1,13 @@
+{
+  "title": "メインメニュー",
+  "menu": {
+    "board": "掲示板",
+    "mypage": "マイページ",
+    "search": "アニメ検索",
+    "worldcup": "アニメ理想ワールドカップ",
+    "recommend": "アニメおすすめ"
+  },
+  "logout": "ログアウト",
+  "logoutAlert": "ログアウトしました。",
+  "fillDB": "アニメDBを埋める"
+}

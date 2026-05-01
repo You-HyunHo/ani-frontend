@@ -1,64 +1,60 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import "../css/Home.css"; // 기존 Home 스타일을 사용하거나 별도의 CSS를 만드세요
+import "../css/Home.css";
+import { useTranslation } from "react-i18next";
 
 export default function RecommendationPage() {
+  const { t } = useTranslation("recommendation");
+
   const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(true);
-  const hasFetched = useRef(false); // 🔥 MyPage 방식처럼 중복 실행 방지
+  const hasFetched = useRef(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // 이미 데이터를 가져왔다면 다시 실행하지 않음
     if (hasFetched.current) return;
     hasFetched.current = true;
 
     const fetchRecommendations = async () => {
       try {
-        // ✅ userId를 넣지 않고 /me 경로로 요청 (세션 쿠키가 자동으로 포함됨)
         const res = await fetch(
           "https://ani-5.onrender.com/api/recommendations/me",
           {
-            credentials: "include", // 세션 인증을 위해 필수
+            credentials: "include",
           }
         );
 
         if (res.status === 401) {
-          alert("로그인이 세션이 만료되었습니다. 다시 로그인해주세요.");
+          alert(t("sessionExpired"));
           navigate("/login");
           return;
         }
 
-        if (!res.ok) throw new Error("추천 데이터를 불러오는데 실패했습니다.");
+        if (!res.ok) throw new Error();
 
         const data = await res.json();
-        console.log("서버에서 온 실제 데이터:", data);
         setRecommendations(data);
       } catch (e) {
         console.error("추천 로직 오류:", e);
+        alert(t("error"));
       } finally {
         setLoading(false);
       }
     };
 
     fetchRecommendations();
-  }, [navigate]);
+  }, [navigate, t]);
 
   return (
     <div className="home-container">
-      {" "}
-      {/* 기존 레이아웃 유지 */}
-      <h1 style={{ textAlign: "center", margin: "20px 0" }}>
-        ✨ 당신을 위한 맞춤 추천 리스트
-      </h1>
+      <h1 style={{ textAlign: "center", margin: "20px 0" }}>✨ {t("title")}</h1>
+
       {loading ? (
-        <p style={{ textAlign: "center" }}>
-          취향 분석 중입니다... 잠시만 기다려주세요!
-        </p>
+        <p style={{ textAlign: "center" }}>{t("loading")}</p>
       ) : recommendations.length === 0 ? (
         <div style={{ textAlign: "center" }}>
-          <p>아직 추천할 데이터가 부족합니다.</p>
-          <p>애니메이션 검색 페이지에서 평점을 더 남겨보세요!</p>
+          <p>{t("empty1")}</p>
+          <p>{t("empty2")}</p>
         </div>
       ) : (
         <div
@@ -99,18 +95,19 @@ export default function RecommendationPage() {
                   {anime.title}
                 </p>
                 <p className="anime-score" style={{ color: "#ff9800" }}>
-                  ⭐ {anime.score}
+                  ⭐ {anime.score} {t("score")}
                 </p>
               </div>
             </div>
           ))}
         </div>
       )}
+
       <div
         style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}
       >
         <button className="logout-btn" onClick={() => navigate("/home")}>
-          메인 메뉴로 돌아가기
+          {t("backHome")}
         </button>
       </div>
     </div>

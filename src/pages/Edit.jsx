@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../css/Edit.css";
+import { useTranslation } from "react-i18next";
 
 function Edit() {
+  const { t } = useTranslation("edit");
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  // 기존 데이터 불러오기
   useEffect(() => {
     fetch(`https://ani-5.onrender.com/api/board/${id}`, {
       credentials: "include",
@@ -41,30 +42,32 @@ function Edit() {
 
   return (
     <div className="edit-container">
-      <h1>✏ 글 수정</h1>
+      <h1>✏ {t("title")}</h1>
 
       <form onSubmit={handleUpdate}>
         <div>
-          제목:
+          {t("label.title")}
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            placeholder={t("placeholder.title")}
             required
           />
         </div>
 
         <div>
-          내용:
+          {t("label.content")}
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
+            placeholder={t("placeholder.content")}
             required
           />
         </div>
 
         <div className="edit-actions">
           <button type="submit" className="update-btn">
-            수정 완료
+            {t("submit")}
           </button>
 
           <button
@@ -72,7 +75,7 @@ function Edit() {
             className="cancel-btn"
             onClick={() => navigate(-1)}
           >
-            취소
+            {t("cancel")}
           </button>
         </div>
       </form>

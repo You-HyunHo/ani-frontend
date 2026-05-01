@@ -1,0 +1,16 @@
+{
+  "title": "글 수정",
+
+  "label": {
+    "title": "제목:",
+    "content": "내용:"
+  },
+
+  "placeholder": {
+    "title": "제목을 입력하세요",
+    "content": "내용을 입력하세요"
+  },
+
+  "submit": "수정 완료",
+  "cancel": "취소"
+}

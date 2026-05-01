@@ -1,0 +1,18 @@
+{
+  "loading": "読み込み中...",
+  "author": "作成者",
+
+  "edit": "修正",
+  "delete": "削除",
+  "backToList": "一覧へ",
+
+  "confirmDelete": "本当に削除しますか？",
+  "deleteSuccess": "削除完了",
+
+  "comments": "コメント",
+  "save": "保存",
+  "cancel": "キャンセル",
+
+  "commentPlaceholder": "コメント入力",
+  "submit": "投稿"
+}

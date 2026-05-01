@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../css/Detail.css";
+import { useTranslation } from "react-i18next";
 
 function Detail() {
-  const { id } = useParams(); // URL에서 id 가져오기
-  const [board, setBoard] = useState(null);
+  const { t } = useTranslation("detail");
+  const { id } = useParams();
   const navigate = useNavigate();
+
+  const [board, setBoard] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [comments, setComments] = useState([]);
   const [content, setContent] = useState("");
@@ -26,31 +29,32 @@ function Detail() {
   };
 
   useEffect(() => {
-    // 게시글 가져오기
     fetch(`https://ani-5.onrender.com/api/board/${id}`, {
       credentials: "include",
     })
       .then((res) => res.json())
       .then((data) => setBoard(data));
 
-    // 현재 로그인 유저 가져오기
     fetch("https://ani-5.onrender.com/api/user/me", {
       credentials: "include",
     })
       .then((res) => res.json())
       .then((data) => setCurrentUser(data.username))
-      .catch(() => setCurrentUser(null)); // 로그인 안된 경우
+      .catch(() => setCurrentUser(null));
 
     fetchComments();
   }, [id]);
 
   const handleDelete = async () => {
+    if (!window.confirm(t("confirmDelete"))) return;
+
     await fetch(`https://ani-5.onrender.com/api/board/${id}`, {
       method: "DELETE",
       credentials: "include",
     });
 
-    navigate("/board"); // 삭제 후 목록으로
+    alert(t("deleteSuccess"));
+    navigate("/board");
   };
 
   const handleCommentSubmit = async () => {
@@ -66,7 +70,7 @@ function Detail() {
     });
 
     setContent("");
-    fetchComments(); // 새로고침
+    fetchComments();
   };
 
   const handleCommentDelete = async (commentId) => {
@@ -95,7 +99,7 @@ function Detail() {
     fetchComments();
   };
 
-  if (!board) return <div>로딩중...</div>;
+  if (!board) return <div>{t("loading")}</div>;
 
   const isAuthor = currentUser === board.user.username;
 
@@ -103,7 +107,9 @@ function Detail() {
     <div className="board-detail">
       <h1>{board.title}</h1>
 
-      <div className="board-meta">작성자: {board.user.username}</div>
+      <div className="board-meta">
+        {t("author")}: {board.user.username}
+      </div>
 
       <div className="board-content">{board.content}</div>
 
@@ -114,16 +120,16 @@ function Detail() {
               className="edit-btn"
               onClick={() => navigate(`/board/edit/${id}`)}
             >
-              수정
+              {t("edit")}
             </button>
             <button className="delete-btn" onClick={handleDelete}>
-              삭제
+              {t("delete")}
             </button>
           </>
         )}
 
         <button className="list-btn" onClick={() => navigate("/board")}>
-          목록으로
+          {t("backToList")}
         </button>
       </div>
 
@@ -131,7 +137,7 @@ function Detail() {
 
       {/* 댓글 */}
       <div className="comment-section">
-        <h3>댓글</h3>
+        <h3>{t("comments")}</h3>
 
         {comments.map((c) => (
           <div key={c.id} className="comment-card">
@@ -143,8 +149,12 @@ function Detail() {
                   value={editContent}
                   onChange={(e) => setEditContent(e.target.value)}
                 />
-                <button onClick={() => handleEditSubmit(c.id)}>저장</button>
-                <button onClick={() => setEditingId(null)}>취소</button>
+                <button onClick={() => handleEditSubmit(c.id)}>
+                  {t("save")}
+                </button>
+                <button onClick={() => setEditingId(null)}>
+                  {t("cancel")}
+                </button>
               </>
             ) : (
               <>
@@ -152,9 +162,9 @@ function Detail() {
 
                 {currentUser === c.username && (
                   <>
-                    <button onClick={() => startEdit(c)}>수정</button>
+                    <button onClick={() => startEdit(c)}>{t("edit")}</button>
                     <button onClick={() => handleCommentDelete(c.id)}>
-                      삭제
+                      {t("delete")}
                     </button>
                   </>
                 )}
@@ -167,9 +177,9 @@ function Detail() {
           <input
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            placeholder="댓글 입력"
+            placeholder={t("commentPlaceholder")}
           />
-          <button onClick={handleCommentSubmit}>작성</button>
+          <button onClick={handleCommentSubmit}>{t("submit")}</button>
         </div>
       </div>
     </div>

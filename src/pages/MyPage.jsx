@@ -1,14 +1,17 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/MyPage.css";
+import { useTranslation } from "react-i18next";
 
 export default function MyPage() {
+  const { t } = useTranslation("mypage");
+
   const [animeList, setAnimeList] = useState([]);
   const hasFetched = useRef(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (hasFetched.current) return; // 🔥 두 번째 실행 막기
+    if (hasFetched.current) return;
     hasFetched.current = true;
 
     const fetchMyPage = async () => {
@@ -29,16 +32,14 @@ export default function MyPage() {
     fetchMyPage();
   }, []);
 
-  console.log(animeList);
-
   return (
     <div className="mypage-container">
-      <h1>마이페이지</h1>
+      <h1>{t("title")}</h1>
 
-      <h2>내가 평가한 애니</h2>
+      <h2>{t("myAnime")}</h2>
 
       {animeList.length === 0 ? (
-        <p>평가한 애니가 없습니다.</p>
+        <p>{t("empty")}</p>
       ) : (
         <div className="anime-grid">
           {animeList.map((anime) => (
@@ -47,9 +48,11 @@ export default function MyPage() {
               className="anime-card"
               onClick={() => navigate(`/anime/${anime.malId}`)}
             >
-              <img src={anime.imageUrl} />
+              <img src={anime.imageUrl} alt={anime.title} />
               <p className="anime-title">{anime.title}</p>
-              <p className="anime-score">⭐ {anime.score}</p>
+              <p className="anime-score">
+                ⭐ {anime.score} {t("score")}
+              </p>
             </div>
           ))}
         </div>

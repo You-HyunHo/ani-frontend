@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../css/AnimeDetail.css";
+import { useTranslation } from "react-i18next";
 
 export default function AnimeDetail() {
+  const { t } = useTranslation("animedetail");
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -41,7 +43,6 @@ export default function AnimeDetail() {
 
     fetchDetail();
 
-    // 로그인 유저
     fetch("https://ani-5.onrender.com/api/user/me", {
       credentials: "include",
     })
@@ -56,9 +57,7 @@ export default function AnimeDetail() {
   const handleSubmit = async () => {
     const res = await fetch("https://ani-5.onrender.com/rate", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify({
         malId: id,
@@ -67,8 +66,7 @@ export default function AnimeDetail() {
     });
 
     const result = await res.json();
-
-    setRating({ score: result.score }); // 🔥 바로 반영
+    setRating({ score: result.score });
   };
 
   const handleReviewSubmit = async () => {
@@ -76,9 +74,7 @@ export default function AnimeDetail() {
 
     await fetch(`https://ani-5.onrender.com/api/review/${id}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify({ content }),
     });
@@ -106,9 +102,7 @@ export default function AnimeDetail() {
 
     await fetch(`https://ani-5.onrender.com/api/review/${reviewId}`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify({ content: editContent }),
     });
@@ -118,47 +112,56 @@ export default function AnimeDetail() {
     fetchReviews();
   };
 
-  if (!anime) return <div>로딩중...</div>;
+  if (!anime) return <div>{t("loading")}</div>;
+
+  // 🔥 장르 번역 함수
+  const translateGenre = (name) => t(name?.toLowerCase().replace(/ /g, "_"));
 
   return (
     <div className="detail-container">
-      <h1>{anime.title || "제목 없음"}</h1>
+      <h1>{anime.title || t("no_title")}</h1>
 
       <div className="detail-top">
         {anime.images?.jpg?.image_url ? (
-          <img src={anime.images.jpg.image_url} />
+          <img src={anime.images.jpg.image_url} alt={anime.title} />
         ) : (
-          <p>이미지 없음</p>
+          <p>{t("no_image")}</p>
         )}
 
         <div className="detail-info">
           <p>
-            <strong>타입:</strong> {anime.type || "정보 없음"}
+            <strong>{t("type")}:</strong> {anime.type || t("no_info")}
           </p>
           <p>
-            <strong>방영 여부:</strong> {anime.status || "정보 없음"}
+            <strong>{t("status")}:</strong> {anime.status || t("no_info")}
           </p>
           <p>
-            <strong>시청 연령:</strong> {anime.rating || "정보 없음"}
+            <strong>{t("rating")}:</strong> {anime.rating || t("no_info")}
           </p>
           <p>
-            <strong>평점:</strong> ⭐ {anime.score || "정보 없음"}
+            <strong>{t("score")}:</strong> ⭐ {anime.score || t("no_info")}
           </p>
 
           <p>
-            <strong>장르:</strong> {anime.genres?.map((g) => g.name).join(", ")}
+            <strong>{t("genre")}:</strong>{" "}
+            {anime.genres?.map((g) => translateGenre(g.name)).join(", ")}
           </p>
           <p>
-            <strong>테마:</strong> {anime.themes?.map((t) => t.name).join(", ")}
+            <strong>{t("theme")}:</strong>{" "}
+            {anime.themes?.map((t2) => translateGenre(t2.name)).join(", ")}
           </p>
           <p>
-            <strong>독자층:</strong>{" "}
-            {anime.demographics?.map((d) => d.name).join(", ")}
+            <strong>{t("demographic")}:</strong>{" "}
+            {anime.demographics?.map((d) => translateGenre(d.name)).join(", ")}
           </p>
 
           {/* 평점 */}
           <div className="rating-box">
-            {rating && <p>내 평점: {rating.score}</p>}
+            {rating && (
+              <p>
+                {t("my_score")}: {rating.score}
+              </p>
+            )}
 
             <select value={score} onChange={(e) => setScore(e.target.value)}>
               {Array.from({ length: 10 }, (_, i) => i + 1).map((i) => (
@@ -168,18 +171,18 @@ export default function AnimeDetail() {
               ))}
             </select>
 
-            <button onClick={handleSubmit}>등록</button>
+            <button onClick={handleSubmit}>{t("submit")}</button>
           </div>
         </div>
       </div>
 
       <button className="back-btn" onClick={() => navigate(-1)}>
-        뒤로가기
+        {t("back")}
       </button>
 
       {/* 리뷰 */}
       <div className="review-section">
-        <h3>리뷰</h3>
+        <h3>{t("review")}</h3>
 
         {reviews.map((r) => (
           <div key={r.id} className="review-card">
@@ -190,8 +193,12 @@ export default function AnimeDetail() {
                   value={editContent}
                   onChange={(e) => setEditContent(e.target.value)}
                 />
-                <button onClick={() => handleEditSubmit(r.id)}>저장</button>
-                <button onClick={() => setEditingId(null)}>취소</button>
+                <button onClick={() => handleEditSubmit(r.id)}>
+                  {t("save")}
+                </button>
+                <button onClick={() => setEditingId(null)}>
+                  {t("cancel")}
+                </button>
               </>
             ) : (
               <>
@@ -199,9 +206,9 @@ export default function AnimeDetail() {
 
                 {currentUser === r.username && (
                   <>
-                    <button onClick={() => startEdit(r)}>수정</button>
+                    <button onClick={() => startEdit(r)}>{t("edit")}</button>
                     <button onClick={() => handleReviewDelete(r.id)}>
-                      삭제
+                      {t("delete")}
                     </button>
                   </>
                 )}
@@ -214,9 +221,9 @@ export default function AnimeDetail() {
           <input
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            placeholder="리뷰 작성"
+            placeholder={t("write_review")}
           />
-          <button onClick={handleReviewSubmit}>등록</button>
+          <button onClick={handleReviewSubmit}>{t("submit")}</button>
         </div>
       </div>
     </div>

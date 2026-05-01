@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../css/Board.css";
+import { useTranslation } from "react-i18next";
+
 function Board() {
+  const { t } = useTranslation("board");
+  const navigate = useNavigate();
+
   const [boards, setBoards] = useState([]);
   const [loginUser, setLoginUser] = useState("");
 
@@ -31,7 +36,7 @@ function Board() {
   }, []);
 
   const handleDelete = async (id) => {
-    if (!window.confirm("진짜 삭제하노?")) return;
+    if (!window.confirm(t("confirmDelete"))) return;
 
     const res = await fetch(`https://ani-5.onrender.com/api/board/${id}`, {
       method: "DELETE",
@@ -44,41 +49,40 @@ function Board() {
       return;
     }
 
-    alert("삭제 완료");
+    alert(t("deleteSuccess"));
     fetchBoards();
+  };
+
+  const handleLogout = async () => {
+    await fetch("https://ani-5.onrender.com/logout", {
+      method: "POST",
+      credentials: "include",
+    });
+    navigate("/login");
   };
 
   return (
     <div className="board-container">
-      <h1>📌 게시판</h1>
+      <h1>📌 {t("title")}</h1>
 
       <div className="board-top">
         <div className="board-links">
-          <a href="board/write">글쓰기</a>
-          <a href="home">메인으로</a>
+          <span onClick={() => navigate("/board/write")}>{t("write")}</span>
+          <span onClick={() => navigate("/home")}>{t("home")}</span>
         </div>
 
-        <button
-          className="logout-btn"
-          onClick={async () => {
-            await fetch("https://ani-5.onrender.com/logout", {
-              method: "POST",
-              credentials: "include",
-            });
-            window.location.href = "/login";
-          }}
-        >
-          로그아웃
+        <button className="logout-btn" onClick={handleLogout}>
+          {t("logout")}
         </button>
       </div>
 
       <table className="board-table">
         <thead>
           <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>삭제</th>
+            <th>{t("table.id")}</th>
+            <th>{t("table.title")}</th>
+            <th>{t("table.author")}</th>
+            <th>{t("table.delete")}</th>
           </tr>
         </thead>
 
@@ -99,7 +103,7 @@ function Board() {
                     className="delete-btn"
                     onClick={() => handleDelete(board.id)}
                   >
-                    삭제
+                    {t("deleteBtn")}
                   </button>
                 )}
               </td>

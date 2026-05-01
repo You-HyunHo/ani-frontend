@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import "../css/AnimeResult.css";
+import { useTranslation } from "react-i18next";
 
 export default function AnimeResult() {
+  const { t } = useTranslation("animeresult");
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -45,13 +47,13 @@ export default function AnimeResult() {
 
   return (
     <div className="result-container">
-      <h1>검색 결과</h1>
+      <h1>{t("search_result")}</h1>
 
       {/* 🎬 리스트 */}
       {data.map((anime) => (
         <div key={anime.mal_id} className="anime-card">
           <Link to={`/anime/${anime.mal_id}`}>
-            <img src={anime.images.jpg.image_url} />
+            <img src={anime.images.jpg.image_url} alt={anime.title} />
           </Link>
 
           <div className="anime-info">
@@ -60,11 +62,15 @@ export default function AnimeResult() {
             </Link>
 
             <p>
-              <strong>장르:</strong>{" "}
-              {anime.genres.map((g) => g.name).join(", ")}
+              <strong>{t("genre")}:</strong>{" "}
+              {anime.genres
+                .map((g) => t(g.name.toLowerCase().replace(/ /g, "_")))
+                .join(", ")}
             </p>
 
-            <p>⭐ 평점: {anime.score}</p>
+            <p>
+              ⭐ {t("score")}: {anime.score ?? "-"}
+            </p>
           </div>
         </div>
       ))}
@@ -98,9 +104,11 @@ export default function AnimeResult() {
           <>
             {endPage < lastPage - 1 && <span> ... </span>}
             <button onClick={() => changePage(lastPage)}>{lastPage}</button>
-            <button onClick={() => navigate("/home")}>홈으로</button>
           </>
         )}
+
+        {/* 홈 버튼 */}
+        <button onClick={() => navigate("/home")}>{t("go_home")}</button>
       </div>
     </div>
   );

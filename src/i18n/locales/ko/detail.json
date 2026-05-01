@@ -1,0 +1,18 @@
+{
+  "loading": "로딩중...",
+  "author": "작성자",
+
+  "edit": "수정",
+  "delete": "삭제",
+  "backToList": "목록으로",
+
+  "confirmDelete": "정말 삭제하시겠습니까?",
+  "deleteSuccess": "삭제 완료",
+
+  "comments": "댓글",
+  "save": "저장",
+  "cancel": "취소",
+
+  "commentPlaceholder": "댓글 입력",
+  "submit": "작성"
+}

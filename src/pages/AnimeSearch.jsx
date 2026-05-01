@@ -1,95 +1,97 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/AnimeSearch.css";
+import { useTranslation } from "react-i18next";
 
 export default function AnimeSearch() {
+  const { t } = useTranslation("animesearch");
   const GENRE_DATA = [
     {
-      title: "장르",
+      title: "genre",
       items: [
-        { id: "1", name: "액션" },
-        { id: "2", name: "모험" },
-        { id: "5", name: "아방가르드" },
-        { id: "46", name: "수상작" },
-        { id: "4", name: "코미디" },
-        { id: "8", name: "드라마" },
-        { id: "10", name: "판타지" },
-        { id: "47", name: "음식/요리" },
-        { id: "14", name: "공포" },
-        { id: "7", name: "미스터리" },
-        { id: "22", name: "로맨스" },
-        { id: "24", name: "SF" },
-        { id: "36", name: "일상" },
-        { id: "30", name: "스포츠" },
-        { id: "37", name: "초자연" },
-        { id: "41", name: "서스펜스" },
+        { id: "1", name: "action" },
+        { id: "2", name: "adventure" },
+        { id: "5", name: "avant_garde" },
+        { id: "46", name: "award_winning" },
+        { id: "4", name: "comedy" },
+        { id: "8", name: "drama" },
+        { id: "10", name: "fantasy" },
+        { id: "47", name: "gourmet" },
+        { id: "14", name: "horror" },
+        { id: "7", name: "mystery" },
+        { id: "22", name: "romance" },
+        { id: "24", name: "sci_fi" },
+        { id: "36", name: "slice_of_life" },
+        { id: "30", name: "sports" },
+        { id: "37", name: "supernatural" },
+        { id: "41", name: "suspense" },
       ],
     },
     {
-      title: "테마",
+      title: "theme",
       items: [
-        { id: "50", name: "성인중심" },
-        { id: "51", name: "의인화" },
-        { id: "52", name: "CGDCT" },
-        { id: "53", name: "육아" },
-        { id: "54", name: "격투스포츠" },
-        { id: "81", name: "여장/남장" },
-        { id: "55", name: "불량학생" },
-        { id: "39", name: "탐정" },
-        { id: "56", name: "교육" },
-        { id: "57", name: "개그" },
-        { id: "58", name: "고어" },
-        { id: "35", name: "하렘" },
-        { id: "59", name: "하이리스크 게임" },
-        { id: "13", name: "역사" },
-        { id: "60", name: "여성 아이돌" },
-        { id: "61", name: "남성 아이돌" },
-        { id: "62", name: "이세계" },
-        { id: "63", name: "힐링" },
-        { id: "64", name: "다각관계" },
-        { id: "74", name: "관계 유지형 로맨스" },
-        { id: "65", name: "TS" },
-        { id: "66", name: "마법소녀" },
-        { id: "17", name: "무술" },
-        { id: "18", name: "메카" },
-        { id: "67", name: "의료" },
-        { id: "38", name: "군대" },
-        { id: "19", name: "음악" },
-        { id: "6", name: "신화" },
-        { id: "68", name: "조직 범죄" },
-        { id: "69", name: "오타쿠 문화" },
-        { id: "20", name: "패러디" },
-        { id: "70", name: "공연 예술" },
-        { id: "71", name: "반려동물" },
-        { id: "40", name: "심리" },
-        { id: "3", name: "레이싱" },
-        { id: "72", name: "환생" },
-        { id: "73", name: "역하렘" },
-        { id: "21", name: "사무라이" },
-        { id: "23", name: "학원" },
-        { id: "75", name: "연예계" },
-        { id: "29", name: "우주" },
-        { id: "11", name: "전략게임" },
-        { id: "31", name: "초능력" },
-        { id: "76", name: "생존" },
-        { id: "77", name: "팀 스포츠" },
-        { id: "78", name: "시간여행" },
-        { id: "82", name: "도시 판타지" },
-        { id: "32", name: "뱀파이어" },
-        { id: "79", name: "게임" },
-        { id: "83", name: "악영 영애" },
-        { id: "80", name: "미술" },
-        { id: "48", name: "직장" },
+        { id: "50", name: "adult_cast" },
+        { id: "51", name: "anthropomorphic" },
+        { id: "52", name: "cgdct" },
+        { id: "53", name: "childcare" },
+        { id: "54", name: "combat_sports" },
+        { id: "81", name: "crossdressing" },
+        { id: "55", name: "delinquents" },
+        { id: "39", name: "detective" },
+        { id: "56", name: "educational" },
+        { id: "57", name: "gag_humor" },
+        { id: "58", name: "gore" },
+        { id: "35", name: "harem" },
+        { id: "59", name: "high_stakes_game" },
+        { id: "13", name: "historical" },
+        { id: "60", name: "idol_female" },
+        { id: "61", name: "idol_male" },
+        { id: "62", name: "isekai" },
+        { id: "63", name: "iyashikei" },
+        { id: "64", name: "love_polygon" },
+        { id: "74", name: "romantic_subtext" },
+        { id: "65", name: "gender_bender" },
+        { id: "66", name: "magical_girl" },
+        { id: "17", name: "martial_arts" },
+        { id: "18", name: "mecha" },
+        { id: "67", name: "medical" },
+        { id: "38", name: "military" },
+        { id: "19", name: "music" },
+        { id: "6", name: "mythology" },
+        { id: "68", name: "organized_crime" },
+        { id: "69", name: "otaku_culture" },
+        { id: "20", name: "parody" },
+        { id: "70", name: "performing_arts" },
+        { id: "71", name: "pets" },
+        { id: "40", name: "psychological" },
+        { id: "3", name: "racing" },
+        { id: "72", name: "reincarnation" },
+        { id: "73", name: "reverse_harem" },
+        { id: "21", name: "samurai" },
+        { id: "23", name: "school" },
+        { id: "75", name: "showbiz" },
+        { id: "29", name: "space" },
+        { id: "11", name: "strategy_game" },
+        { id: "31", name: "super_power" },
+        { id: "76", name: "survival" },
+        { id: "77", name: "team_sports" },
+        { id: "78", name: "time_travel" },
+        { id: "82", name: "urban_fantasy" },
+        { id: "32", name: "vampire" },
+        { id: "79", name: "video_game" },
+        { id: "83", name: "villainess" },
+        { id: "80", name: "visual_arts" },
+        { id: "48", name: "workplace" },
       ],
     },
     {
-      title: "독자층",
+      title: "demographic",
       items: [
-        { id: "43", name: "여성향" },
-        { id: "15", name: "어린이" },
-        { id: "42", name: "청년" },
-        { id: "27", name: "소년" },
-        { id: "25", name: "소녀" },
+        { id: "43", name: "josei" },
+        { id: "15", name: "kids" },
+        { id: "42", name: "seinen" },
+        { id: "27", name: "shounen" },
+        { id: "25", name: "shoujo" },
       ],
     },
   ];
@@ -140,12 +142,12 @@ export default function AnimeSearch() {
 
   return (
     <div className="anime-container">
-      <h1>애니메이션 검색</h1>
+      <h1>{t("title")}</h1>
 
       {/* 🔎 검색어 */}
       <input
         type="text"
-        placeholder="애니 제목 입력"
+        placeholder={t("search_placeholder")}
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
       />
@@ -153,12 +155,12 @@ export default function AnimeSearch() {
       <hr />
 
       {/* 🎛 필터 */}
-      <h3>Filters</h3>
+      <h3>{t("filters")}</h3>
 
       <div>
-        <label>작품 유형:</label>
+        <label>{t("type")}:</label>
         <select value={type} onChange={(e) => setType(e.target.value)}>
-          <option value="">All</option>
+          <option value="">{t("All")}</option>
           <option value="tv">TV</option>
           <option value="movie">Movie</option>
           <option value="ova">OVA</option>
@@ -172,29 +174,29 @@ export default function AnimeSearch() {
       </div>
 
       <div>
-        <label>방영 상태:</label>
+        <label>{t("status")}:</label>
         <select value={status} onChange={(e) => setStatus(e.target.value)}>
-          <option value="">All</option>
-          <option value="airing">방영 중</option>
-          <option value="complete">방영 완료</option>
-          <option value="upcoming">방영 예정</option>
+          <option value="">{t("All")}</option>
+          <option value="airing">{t("airing")}</option>
+          <option value="complete">{t("complete")}</option>
+          <option value="upcoming">{t("upcoming")}</option>
         </select>
       </div>
 
       <div>
-        <label>연령 등급:</label>
+        <label>{t("rating")}:</label>
         <select value={rating} onChange={(e) => setRating(e.target.value)}>
-          <option value="">All</option>
-          <option value="g">전체 이용가 (G)</option>
-          <option value="pg">보호자 지도 권장 (PG)</option>
-          <option value="pg13">13세 이상 권장 (PG-13)</option>
-          <option value="r17">17세 이상 시청가 (R-17)</option>
-          <option value="r">성인 이용가 (R)</option>
+          <option value="">{t("All")}</option>
+          <option value="g">{t("g")}</option>
+          <option value="pg">{t("pg")}</option>
+          <option value="pg13">{t("pg13")}</option>
+          <option value="r17">{t("r17")}</option>
+          <option value="r">{t("r")}</option>
         </select>
       </div>
 
       <div>
-        <label>최소 평점:</label>
+        <label>{t("minScore")}:</label>
         <input
           type="number"
           min="0"
@@ -206,7 +208,7 @@ export default function AnimeSearch() {
       </div>
 
       <div>
-        <label>방영 시작일:</label>
+        <label>{t("startDate")}:</label>
         <input
           type="date"
           value={startDate}
@@ -215,7 +217,7 @@ export default function AnimeSearch() {
       </div>
 
       <div>
-        <label>방영 종료일:</label>
+        <label>{t("endDate")}:</label>
         <input
           type="date"
           value={endDate}
@@ -225,10 +227,10 @@ export default function AnimeSearch() {
 
       <hr />
 
-      <h3>장르</h3>
+      <h3>{t("genre")}</h3>
 
       <button className="genre-button" onClick={() => setIsModalOpen(true)}>
-        장르 선택 ({genres.length})
+        {t("genre_select")} ({genres.length})
       </button>
 
       <div className="selected-genres">
@@ -237,7 +239,7 @@ export default function AnimeSearch() {
 
           return (
             <span key={id} onClick={() => handleGenreChange(id)}>
-              #{g?.name} ❌
+              #{t(g?.name)} ❌
             </span>
           );
         })}
@@ -246,39 +248,39 @@ export default function AnimeSearch() {
       {isModalOpen && (
         <div className="modal" onClick={() => setIsModalOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>장르 선택</h2>
+            <h2>{t("genre_select")}</h2>
 
             {/* 🔍 검색 */}
             <input
               type="text"
-              placeholder="장르 검색..."
+              placeholder={t("search_genre")}
               value={searchGenre}
               onChange={(e) => setSearchGenre(e.target.value)}
             />
 
-            {/* 🔥 선택된 장르 (상단 고정) */}
+            {/* 선택된 장르 */}
             {genres.length > 0 && (
               <div className="selected-top">
                 {genres.map((id) => {
                   const g = FLAT_GENRES.find((v) => v.id === id);
                   return (
                     <span key={id} onClick={() => handleGenreChange(id)}>
-                      #{g?.name} ❌
+                      #{t(g?.name)} ❌
                     </span>
                   );
                 })}
               </div>
             )}
 
-            {/* 🔥 카테고리별 출력 */}
+            {/* 장르 리스트 */}
             <div className="genre-list">
               {GENRE_DATA.map((section) => (
                 <div key={section.title}>
-                  <h4>{section.title}</h4>
+                  <h4>{t(section.title)}</h4>
 
                   <div className="genre-section">
                     {section.items
-                      .filter((g) => g.name.includes(searchGenre))
+                      .filter((g) => t(g.name).includes(searchGenre))
                       .map((g) => (
                         <label key={g.id}>
                           <input
@@ -286,7 +288,7 @@ export default function AnimeSearch() {
                             checked={genres.includes(g.id)}
                             onChange={() => handleGenreChange(g.id)}
                           />
-                          {g.name}
+                          {t(g.name)}
                         </label>
                       ))}
                   </div>
@@ -296,8 +298,8 @@ export default function AnimeSearch() {
 
             {/* 버튼 */}
             <div className="modal-buttons">
-              <button onClick={() => setGenres([])}>전체 해제</button>
-              <button onClick={() => setIsModalOpen(false)}>완료</button>
+              <button onClick={() => setGenres([])}>{t("reset")}</button>
+              <button onClick={() => setIsModalOpen(false)}>{t("done")}</button>
             </div>
           </div>
         </div>
@@ -305,7 +307,7 @@ export default function AnimeSearch() {
 
       <hr />
 
-      <button onClick={handleSearch}>Search</button>
+      <button onClick={handleSearch}>{t("search")}</button>
     </div>
   );
 }

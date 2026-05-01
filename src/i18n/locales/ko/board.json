@@ -1,0 +1,18 @@
+{
+  "title": "게시판",
+  "write": "글쓰기",
+  "home": "메인으로",
+  "logout": "로그아웃",
+
+  "confirmDelete": "진짜 삭제하겠습니까?",
+  "deleteSuccess": "삭제 완료",
+
+  "table": {
+    "id": "번호",
+    "title": "제목",
+    "author": "작성자",
+    "delete": "삭제"
+  },
+
+  "deleteBtn": "삭제"
+}

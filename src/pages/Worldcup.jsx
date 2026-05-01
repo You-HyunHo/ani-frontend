@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Worldcup.css";
+import { useTranslation } from "react-i18next";
 
 export default function Worldcup() {
+  const { t } = useTranslation("worldcup");
+
   const [candidates, setCandidates] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [winners, setWinners] = useState([]);
@@ -41,44 +44,47 @@ export default function Worldcup() {
     }
   };
 
+  // 시작 화면
   if (!isStarted) {
     return (
       <div className="start-overlay">
         <div className="start-box">
-          <h2>애니메이션 월드컵</h2>
+          <h2>{t("title")}</h2>
 
           <select
             value={roundSize}
             onChange={(e) => setRoundSize(Number(e.target.value))}
           >
-            <option value={16}>16강</option>
-            <option value={32}>32강</option>
-            <option value={64}>64강</option>
-            <option value={128}>128강</option>
-            <option value={256}>256강</option>
+            <option value={16}>{t("round", { size: 16 })}</option>
+            <option value={32}>{t("round", { size: 32 })}</option>
+            <option value={64}>{t("round", { size: 64 })}</option>
+            <option value={128}>{t("round", { size: 128 })}</option>
+            <option value={256}>{t("round", { size: 256 })}</option>
           </select>
 
           <div className="start-buttons">
-            <button onClick={() => setIsStarted(true)}>시작하기</button>
+            <button onClick={() => setIsStarted(true)}>{t("start")}</button>
 
-            <button onClick={() => navigate("/home")}>홈으로</button>
+            <button onClick={() => navigate("/home")}>{t("home")}</button>
           </div>
         </div>
       </div>
     );
   }
 
+  // 우승 화면
   if (candidates.length === 1) {
     const winner = candidates[0];
 
     return (
       <div className="winner-container">
-        <h1>🏆 우승!</h1>
+        <h1>🏆 {t("winner")}</h1>
 
         <div className="winner-card">
           <img src={winner.imageUrl} alt={winner.title} />
           <p>{winner.title}</p>
         </div>
+
         <div className="result-buttons">
           <button
             onClick={() => {
@@ -88,32 +94,35 @@ export default function Worldcup() {
               setWinners([]);
             }}
           >
-            다시 하기
+            {t("restart")}
           </button>
 
-          <button onClick={() => navigate("/home")}>홈으로</button>
+          <button onClick={() => navigate("/home")}>{t("home")}</button>
         </div>
       </div>
     );
   }
 
+  // 로딩
   if (candidates.length === 0) {
-    return <div>로딩중...</div>;
+    return <div>{t("loading")}</div>;
   }
 
   const left = candidates[currentIndex];
   const right = candidates[currentIndex + 1];
 
   if (!left || !right) {
-    return <div>로딩중...</div>;
+    return <div>{t("loading")}</div>;
   }
 
   return (
     <div className="worldcup-container">
       <div className="worldcup-top-overlay">
         <h1>
-          애니 이상형 월드컵{" "}
-          {candidates.length === 2 ? "결승" : `${candidates.length}강`}{" "}
+          {t("title")}{" "}
+          {candidates.length === 2
+            ? t("final")
+            : t("round", { size: candidates.length })}{" "}
           {Math.floor(currentIndex / 2) + 1}/{candidates.length / 2}
         </h1>
       </div>
@@ -126,7 +135,7 @@ export default function Worldcup() {
           </div>
         </div>
 
-        <div className="worldcup-vs">VS</div>
+        <div className="worldcup-vs">{t("vs")}</div>
 
         <div className="worldcup-card" onClick={() => handleSelect(right)}>
           <img src={right.imageUrl} alt={right.title} />

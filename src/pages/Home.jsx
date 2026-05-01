@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import "../css/Home.css";
+import { useTranslation } from "react-i18next";
+
 function Home() {
+  const { t } = useTranslation("home");
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -9,7 +12,7 @@ function Home() {
       credentials: "include",
     });
 
-    alert("로그아웃");
+    alert(t("logoutAlert"));
     navigate("/login");
   };
 
@@ -24,30 +27,31 @@ function Home() {
 
   return (
     <div className="home-container">
-      <h1>메인 메뉴</h1>
+      <h1>{t("title")}</h1>
 
       <ul className="menu-list">
         <li>
-          <a href="/board">게시판</a>
+          <a href="/board">{t("menu.board")}</a>
         </li>
         <li>
-          <a href="/mypage">마이페이지</a>
+          <a href="/mypage">{t("menu.mypage")}</a>
         </li>
         <li>
-          <a href="/animesearch">애니메이션검색</a>
+          <a href="/animesearch">{t("menu.search")}</a>
         </li>
         <li>
-          <a href="/worldcup">애니이상형월드컵</a>
+          <a href="/worldcup">{t("menu.worldcup")}</a>
         </li>
         <li>
-          <a href="/recommendations">애니추천</a>
+          <a href="/recommendations">{t("menu.recommend")}</a>
         </li>
       </ul>
 
       <button className="logout-btn" onClick={handleLogout}>
-        로그아웃
+        {t("logout")}
       </button>
-      <button onClick={handleFetchAll}>애니 DB 채우기</button>
+
+      <button onClick={handleFetchAll}>{t("fillDB")}</button>
     </div>
   );
 }
