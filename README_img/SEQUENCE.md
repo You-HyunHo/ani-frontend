@@ -118,7 +118,7 @@ sequenceDiagram
     BE-->>FE: 処理完了レスポンス
 ```
 
-## 검색
+## 検索
 ```mermaid
 sequenceDiagram
     participant FE as Frontend
@@ -126,86 +126,87 @@ sequenceDiagram
     participant EXT as External API (Jikan)
     participant DB 
 
-    %% 1. 검색 기능
-    Note over FE, EXT: [검색] 키워드 및 필터 조건 적용
-    FE->>BE: GET /api/anime/search (keyword, type, page 등)
-    BE->>BE: UriComponentsBuilder로 쿼리문 동적 생성
+    %% 1. 検索機能
+    Note over FE, EXT: [検索] キーワードおよびフィルター条件を適用
+    FE->>BE: GET /api/anime/search（keyword, type, page など）
+    BE->>BE: UriComponentsBuilderでクエリ文字列を動的生成
     BE->>EXT: GET /v4/anime?q=...&page=...
-    EXT-->>BE: 애니메이션 목록 및 페이지 정보 반환
+    EXT-->>BE: アニメ一覧およびページ情報を返却
     
-    Note over BE: 로직: 현재 페이지 기준<br/>페이지 그룹(Start~End) 계산
+    Note over BE: ロジック：現在ページ基準で<br/>ページグループ（Start〜End）を計算
     
-    BE-->>FE: 검색 결과 + 페이지네이션 정보 응답
+    BE-->>FE: 検索結果 + ページネーション情報を返却
 
-    %% 2. 상세 조회
-    Note over FE, DB: [상세] 정보 및 내부 평점 결합
+    %% 2. 詳細取得
+    Note over FE, DB: [詳細] 外部情報と内部評価を統合
     FE->>BE: GET /api/anime/{id}
-    par 외부 정보 조회
+    par 外部情報取得
         BE->>EXT: GET /v4/anime/{id}
-        EXT-->>BE: 상세 데이터 반환
-    and 내부 평점 조회
-        BE->>DB: 해당 애니메이션 평점(Rating) 조회
-        DB-->>BE: 평점 데이터 반환
+        EXT-->>BE: 詳細データ返却
+    and 内部評価取得
+        BE->>DB: 該当アニメの評価（Rating）を取得
+        DB-->>BE: 評価データ返却
     end
     
-    BE-->>FE: 애니메이션 정보 + 평점 통합 응답
+    BE-->>FE: アニメ情報 + 評価を統合して返却
 ```
 
-## 리뷰
+## レビュー
 ```mermaid
 sequenceDiagram
     participant FE as Frontend
     participant BE as Backend
     participant DB 
-    %% 1. 조회
-    FE->>BE: GET /api/review/{malId} (리뷰 요청)
-    BE->>DB: 애니메이션 ID로 리뷰 목록 조회
-    DB-->>BE: 데이터 반환
-    BE-->>FE: 리뷰 목록 응답 (Drafter, Content 등)
 
-    %% 2. 작성
-    FE->>BE: POST /api/review/{malId} (리뷰 내용)
-    BE->>DB: 유저 정보 확인 및 리뷰 저장
+    %% 1. 取得
+    FE->>BE: GET /api/review/{malId}（レビュー取得リクエスト）
+    BE->>DB: アニメIDでレビュー一覧を取得
+    DB-->>BE: データ返却
+    BE-->>FE: レビュー一覧を返却（Drafter, Content など）
+
+    %% 2. 作成
+    FE->>BE: POST /api/review/{malId}（レビュー内容）
+    BE->>DB: ユーザー情報を確認後、レビューを保存
     BE-->>FE: 200 OK
 
-    %% 3. 수정/삭제
+    %% 3. 修正／削除
     FE->>BE: PUT/DELETE /api/review/{reviewId}
-    BE->>DB: 기존 리뷰의 작성자 일치 여부 검증
+    BE->>DB: 既存レビューの投稿者が一致するか検証
     
-    alt 검증 통과
-        BE->>DB: 리뷰 수정 또는 삭제 실행
-        BE-->>FE: 처리 완료 응답
-    else 검증 실패
-        BE-->>FE: 500/RuntimeException (권한 없음)
+    alt 検証成功
+        BE->>DB: レビューの修正または削除を実行
+        BE-->>FE: 処理完了レスポンス
+    else 検証失敗
+        BE-->>FE: 500 / RuntimeException（権限なし）
     end
 ```
 
-## 평점
+## 評価
 ```mermaid
 sequenceDiagram
     participant FE as Frontend
     participant BE as Backend
     participant DB 
 
-    FE->>BE: POST /rate (malId, score)
+    FE->>BE: POST /rate（malId, score）
     
-    Note over BE: SecurityContext에서<br/>현재 로그인 유저 확인
+    Note over BE: SecurityContextから<br/>現在ログイン中のユーザーを確認
     
-    BE->>DB: 해당 유저 & malId로 기존 평점 조회
+    BE->>DB: 該当ユーザー & malIdで既存評価を検索
     
-    alt 기존 평점 존재 (Update)
-        DB-->>BE: AnimeRating 엔티티 반환
-        BE->>BE: 점수(score) 수정
-    else 기존 평점 없음 (Create)
-        DB-->>BE: 빈 값(Optional.empty) 반환
-        BE->>BE: 새 AnimeRating 객체 생성 및 설정
+    alt 既存評価あり（Update）
+        DB-->>BE: AnimeRatingエンティティ返却
+        BE->>BE: スコア（score）を更新
+    else 既存評価なし（Create）
+        DB-->>BE: 空の値（Optional.empty）返却
+        BE->>BE: 新規AnimeRatingオブジェクトを生成・設定
     end
     
-    BE->>DB: 최종 평점 데이터 저장 (save)
-    BE-->>FE: 200 OK (저장 완료 메시지 & 점수)
+    BE->>DB: 最終評価データを保存（save）
+    BE-->>FE: 200 OK（保存完了メッセージ & スコア）
 ```
 
-## 마이페이지
+## マイページ
 ```mermaid
 sequenceDiagram
     participant FE as Frontend
@@ -213,19 +214,19 @@ sequenceDiagram
     participant DB 
     participant EXT as External API (Jikan)
 
-    FE->>BE: GET /api/mypage (요청)
+    FE->>BE: GET /api/mypage（リクエスト）
     
-    Note over BE: SecurityContext에서<br/>로그인 유저 확인
+    Note over BE: SecurityContextから<br/>ログイン中のユーザーを確認
     
-    BE->>DB: 유저가 평점 남긴 목록(malId, score) 조회
-    DB-->>BE: List<AnimeRating> 반환
+    BE->>DB: ユーザーが評価した一覧（malId, score）を取得
+    DB-->>BE: List<AnimeRating> を返却
 
-    loop 각 평점 데이터에 대하여 (malId 기준)
-        BE->>EXT: GET /v4/anime/{malId} (상세 정보 요청)
-        EXT-->>BE: 애니메이션 제목, 이미지 URL 반환
-        Note over BE: 내 평점(score) + API 정보 결합 (DTO 생성)
-        BE->>BE: API 부하 방지 (Sleep 0.3초)
+    loop 各評価データごと（malId基準）
+        BE->>EXT: GET /v4/anime/{malId}（詳細情報リクエスト）
+        EXT-->>BE: アニメタイトル、画像URLを返却
+        Note over BE: 自分の評価（score）+ API情報を結合（DTO生成）
+        BE->>BE: API負荷対策（0.3秒スリープ）
     end
 
-    BE-->>FE: 결합된 마이페이지 리스트 반환
+    BE-->>FE: 結合されたマイページ一覧を返却
 ```
