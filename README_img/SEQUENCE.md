@@ -1,7 +1,7 @@
 # Sequence Diagrams
 
 
-## 로그인
+## ログイン
 ```mermaid
 sequenceDiagram 
 participant Frontend
@@ -9,9 +9,9 @@ participant Backend
 participant DB
 
    
-    Frontend->>Backend: 아이디/pw 입력
-    Backend->>DB: 유저정보 확인
-    DB-->>Frontend: 로그인 완료
+    Frontend->>Backend: ID/パスワード入力
+    Backend->>DB: ユーザー情報の確認
+    DB-->>Frontend: ログイン完了
     
 ```
 
