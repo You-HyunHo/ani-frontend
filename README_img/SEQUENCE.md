@@ -15,34 +15,34 @@ participant DB
     
 ```
 
-## 회원가입
+## 会員登録
 ```mermaid
 sequenceDiagram
     participant FE as Frontend (React)
     participant BE as Backend (Spring)
     participant DB as Database
 
-    FE->>BE: 1. 가입 요청 (ID, PW, 나이, 성별)
-    BE->>DB: 2. 중복 확인 및 사용자 저장
-    DB-->>BE: 3. 저장 완료
-    BE-->>FE: 4. 응답 (200 OK / 성공 메시지)
+    FE->>BE: 1. 登録リクエスト（ID、パスワード、年齢、性別）
+    BE->>DB: 2. 重複確認とユーザー貯蔵
+    DB-->>BE: 3. 貯蔵完了
+    BE-->>FE: 4. 回答（200 OK / 成功メッセージ）
 ```
 
-## 로그인완료 후
+## ログイン完了後
 ```mermaid
 sequenceDiagram
     participant FE as Frontend 
     participant BE as Backend 
     participant DB 
 
-    FE->>BE: 1. 내 정보 요청 (GET /me)
-    BE->>DB: 2. 로그인된 사용자 정보 조회
-    DB-->>BE: 3. 유저 데이터 반환
-    BE-->>FE: 4. 응답 (username, firstLogin 등)
-    Note over FE: firstLogin 값에 따라<br/>온보딩 또는 메인으로 이동
+    FE->>BE: 1. マイ情報リクエスト (GET /me)
+    BE->>DB: 2. ログイン中のユーザー情報の検索
+    DB-->>BE: 3. ユーザーデータの返還
+    BE-->>FE: 4. 応答 (username, firstLogin 등)
+    Note over FE: firstLogin の値に応じて<br/>オンボーディングまたはメインへ移動
 ```
 
-## 초기로그인후 평가(onbaording)
+## 初期ログイン後の評価(onbaording)
 ```mermaid
 sequenceDiagram
     autonumber
@@ -50,73 +50,72 @@ sequenceDiagram
     participant BE as Backend (Spring)
     participant DB 
 
-    Note over FE, DB: [단계 1] 온보딩 데이터 로드
+    Note over FE, DB: [ステップ1] オンボーディングデータのロード
     FE->>BE: GET /api/onboarding
-    BE->>DB: 랜덤 애니메이션 20개 조회
-    DB-->>BE: 애니메이션 리스트 반환
-    BE-->>FE: 20개 리스트 응답 (malId, title, imageUrl)
+    BE->>DB: ランダムアニメーション20個照会
+    DB-->>BE: アニメーションリスト返還
+    BE-->>FE: 20個リスト応答 (malId, title, imageUrl)
 
-    Note over FE, DB: [단계 2] 사용자 평가 및 저장
-    FE->>FE: 사용자가 애니메이션 점수 선택
-    FE->>BE: POST /api/onboarding/save (평가 데이터)
+    Note over FE, DB: [ステップ2] ユーザー評価および保存
+    FE->>FE: ユーザーがアニメの評価（スコア）を選択
+    FE->>BE: POST /api/onboarding/save（評価データ）
     
-    loop 각 평가 항목 처리
-        BE->>DB: 기존 평가 여부 확인 및 점수(AnimeRating) 저장
+    loop 各評価項目の処理
+        BE->>DB: 既存評価の有無を確認し、スコア（AnimeRating）を保存
     end
 
-    Note over FE, DB: [단계 3] 유저 상태 업데이트 및 종료
-    BE->>DB: 유저 firstLogin 상태 변경 (true -> false)
-    DB-->>BE: 업데이트 완료
-    BE-->>FE: { "message": "온보딩 완료" }
+    Note over FE, DB: [ステップ3] ユーザー状態の更新および完了
+    BE->>DB: ユーザーのfirstLogin状態を変更（true → false）
+    DB-->>BE: 更新完了
+    BE-->>FE: { "message": "オンボーディング完了" }
     
-    Note over FE: 메인 페이지로 리다이렉트
+    Note over FE: メインページへリダイレクト
 ```
-## 게시판
+## 掲示板
 ```mermaid
 sequenceDiagram
     participant FE as Frontend
     participant BE as Backend
     participant DB 
 
-    %% 1. 권한 준비 (버튼 노출 제어)
-    FE->>BE: GET /api/user/me (내 정보 확인)
-    Note over FE: 작성자 == 내이름 비교 후<br/>삭제 버튼 노출 결정
+    %% 1. 権限準備（ボタン表示制御）
+    FE->>BE: GET /api/user/me（自分の情報を確認）
+    Note over FE: 投稿者 == 自分の名前を比較し、<br/>削除ボタンの表示を決定
 
-    %% 2. 삭제 실행
+    %% 2. 削除実行
     FE->>BE: DELETE /api/board/{id}
-    BE->>DB: 작성자 일치 여부 최종 검증
+    BE->>DB: 投稿者が一致するかを最終確認
     
-    alt 검증 통과
-        BE->>DB: 데이터 삭제
-        BE-->>FE: 200 OK (성공)
-        Note over FE: 목록 새로고침
-    else 검증 실패
-        BE-->>FE: 403 Forbidden (실패)
+    alt 検証成功
+        BE->>DB: データ削除
+        BE-->>FE: 200 OK（成功）
+        Note over FE: 一覧を更新
+    else 検証失敗
+        BE-->>FE: 403 Forbidden（失敗）
     end
 ```
-## 댓글
+## コメント
 ```mermaid
-
-    sequenceDiagram
+sequenceDiagram
     participant FE as Frontend
     participant BE as Backend
     participant DB 
 
-    %% 1. 조회
-    FE->>BE: GET /api/comment/{boardId} (댓글 요청)
-    BE->>DB: 해당 글의 댓글들 조회
-    DB-->>BE: 데이터 반환
-    BE-->>FE: 댓글 목록 응답
+    %% 1. 取得
+    FE->>BE: GET /api/comment/{boardId}（コメント取得リクエスト）
+    BE->>DB: 該当投稿のコメント一覧を取得
+    DB-->>BE: データ返却
+    BE-->>FE: コメント一覧を返却
 
-    %% 2. 작성
-    FE->>BE: POST /api/comment/{boardId} (내용)
-    BE->>DB: 유저/게시글 확인 후 댓글 저장
-    BE-->>FE: 성공 응답
+    %% 2. 作成
+    FE->>BE: POST /api/comment/{boardId}（内容）
+    BE->>DB: ユーザー／投稿を確認後、コメントを保存
+    BE-->>FE: 成功レスポンス
 
-    %% 3. 수정/삭제 (권한체크 포함)
+    %% 3. 修正／削除（権限チェック含む）
     FE->>BE: PUT/DELETE /api/comment/{commentId}
-    BE->>DB: 작성자 일치 확인 후 수정/삭제
-    BE-->>FE: 처리 완료 응답
+    BE->>DB: 投稿者が一致するか確認後、修正／削除
+    BE-->>FE: 処理完了レスポンス
 ```
 
 ## 검색
