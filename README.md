@@ -6,7 +6,7 @@
 - [배포 링크](https://ani-frontend-ek9a.onrender.com/)
 - [backend git hub링크](https://github.com/rlarbtns5898-design/ani)
 
-##목차
+## 목차
 
 - [ 팀 구성원 및 업무 분담](#팀-구성원-및-업무-분담)
 - [DB 모델링](#db-모델링)
