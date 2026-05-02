@@ -29,7 +29,27 @@
 -[sequence](./README_img/SEQUENCE.md)
 
 ## トラブルシューティングおよび解決
+### 1. 推薦リストの一般化（人気作への偏り）問題の解決
+-【問題点】
 
+初期の推薦ロジックでは、単純な「ジャンル一致」と「共通視聴数」のみを計算していたため、『ONE PIECE』や『進撃の巨人』といった圧倒的多数が視聴しているメジャーな作品ばかりが推薦される現象が発生しました。これにより、ユーザー固有の細かな好みが反映されず、パーソナライズされた結果が出でなく推薦の質が低下する問題がありました。
+
+-【原因分析】
+
+多くのユーザーが視聴している作品は、統計的に「偶然の一致」が発生しやすく、それが計算上のスコアを押し上げてしまうためです。
+
+-【解決策：IDF (逆文書頻度) の導入】
+
+自然言語処理などで用いられるIDF(Inverse Document Frequency)の概念を推薦アルゴリズムに導入しました。
+
+ロジック: 全ユーザーの視聴データに基づき、視聴数が多い作品の重みを下げ、逆に視聴数が少ない希少な作品（ニッチな名作）が一致した場合のスコア(WorkScore)を高く設定しました。
+
+* **数式**:
+$$ 
+IDF(i) = \log \left( \frac{N + 1}{df(i) + 1} \right) + 1.0 
+$$
+
+【結果】メジャー作品に埋もれていた「ユーザーの真の好みに近い作品」が上位に表示されるようになり、推薦の多様性と的中率を大幅に向上させることができました。
 ## 主要機能
 
 ```mermaid
@@ -37,40 +57,82 @@ sequenceDiagram
     autonumber
     participant FE as Frontend 
     participant BE as Backend 
-    participant DB 
-
-    FE->>BE: バックエンドへリクエスト
+    participant DB as D
+    FE->>BE: 推薦リスト要請
     
-    Note over BE: [ステップ1：ユーザー嗜好データ分析]
-    BE->>BE: extractGenresByScore() 実行<br/>（好み／非好みジャンルを分類）
+    Note over BE: [Step 1: ユーザー好き嫌い分析]
+    BE->>BE: extractGenresByScore() 実行<br/>(好/不好 ジャンル分類)
 
-    Note over BE: [ステップ2：候補ユーザー抽出]
-    BE->>DB: findHybridCandidateUserIds 呼び出し
-    DB-->>BE: アニメ／ジャンルが類似する候補ユーザー一覧を返却
+    Note over BE: [Step 2: 候補群の抽出]
+    BE->>DB: findHybridCandidateUserIds 呼出
+    DB-->>BE: 類似傾向を持つユーザーリスト返却
 
-    Note over BE: [ステップ3：統計データ準備]
-    BE->>DB: findAllAnimeUsageCounts() 呼び出し
-    DB-->>BE: IDF計算用のアニメ統計データを返却
+    Note over BE: [Step 3: 統計データの準備]
+    BE->>DB: findAllAnimeUsageCounts() 呼出
+    DB-->>BE: IDF計算用の統計データ返却
 
-    Note over BE: [ステップ4：ユーザー別類似度スコアリング]
-    loop 候補ユーザー一覧をループ
+    Note over BE: [Step 4: ユーザー別類似度スコアリング]
+    loop 候補ユーザーリストの巡回
         rect rgb(240, 240, 240)
-            BE->>BE: workScore（作品類似度）を計算
-            BE->>BE: genreScore（ジャンル親和度）を計算
-            BE->>BE: penalty（非好みジャンルの減点）を計算
-            BE->>BE: UserScoreオブジェクト生成および総合スコア算出
+            BE->>BE: WorkScore (作品類似度) 計算
+            BE->>BE: GenreScore (ジャンル親密度) 計算
+            BE->>BE: Penalty (非選好ジャンル減点) 計算
+            BE->>BE: 最終スコアの合算
         end
     end
 
-    Note over BE: [ステップ5：最終推薦リスト生成]
-    BE->>BE: UserScore基準で降順ソートし、上位30名を選定
-    BE->>DB: findRecommendedAnimeIds 呼び出し（未視聴作品を抽出）
-    DB-->>BE: 推薦アニメIDリストを返却
+    Note over BE: [Step 5: 最終推薦リストの生成]
+    BE->>BE: スコア順にソート、上位30名を選定
+    BE->>DB: findRecommendedAnimeIds 呼出 (未視聴作品の抽出)
+    DB-->>BE: 推薦アニメIDリスト返却
     
-    opt 探索ロジック（Exploration）
-        BE->>DB: findHiddenGemsByGenre() 呼び出し
+    opt 探索ロジック (Exploration)
+        BE->>DB: findHiddenGemsByGenre() 呼출
     end
 
-    BE-->>FE: 最終推薦リスト10件を返却
+    BE-->>FE: 最終推薦リスト(10件)をレスポンス
 ```
+
+### 推薦アルゴリズムの詳細 (Recommendation Logic)
+
+本プロジェクトのコアとなるハイブリッド推薦システムは、以下の3つの主要スコアを合算して算出されます。
+
+1. 作品類似度 (WorkScore) - IDF適用
+
+自分と相手の共通視聴作品における情報の希少性を評価します。
+
+核心: 誰もが見ている作品の一致よりも、少数のファンしか知らない作品の一致を「好みの近さ」として高く評価します。
+
+ 
+$$
+計算: WorkScore = 10 \cdot \sum IDF(i)
+$$
+
+2. ジャンル親密度 (GenreScore)
+
+ユーザーが過去に高評価をつけた「選好ジャンル」との一致度を計算します。
+
+extractGenresByScore を通じて動的に抽出された上位3つのジャンルに基づき、比較対象ユーザーの全視聴データと照合し平均化します。
+
+$$
+計算: GenreScore = 5 \cdot \text{avg}(\text{matchcount} \cdot 2.0)
+$$
+
+3. 非選好ジャンルへのペナルティ (Penalty)
+
+ユーザーが「嫌い」と判断したジャンル（4点以下の評価）が含まれる場合、推薦から排除または順位を下げます。
+
+相手が高評価（7点以上）をつけていても、自分の非選好ジャンルであれば減点処理を行います。
+
+$$
+計算: Penalty = \sum (\text{MatchCount} \cdot 1.5)
+$$
+
+4. スコア合算と最終選定
+
+$$TotalScore(u) = WorkScore + GenreScore - Penalty
+$$
+
+上記の最終スコアに基づき、類似ユーザー上位30名を選定。その30名が視聴済みで、自分が未視聴の作品から最終的な10件を推薦します。
+
 
