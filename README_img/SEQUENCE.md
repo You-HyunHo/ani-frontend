@@ -18,13 +18,13 @@ participant DB
 ## 会員登録
 ```mermaid
 sequenceDiagram
-    participant FE as Frontend (React)
-    participant BE as Backend (Spring)
+    participant FE as Frontend 
+    participant BE as Backend 
     participant DB as Database
 
     FE->>BE: 1. 登録リクエスト（ID、パスワード、年齢、性別）
-    BE->>DB: 2. 重複確認とユーザー貯蔵
-    DB-->>BE: 3. 貯蔵完了
+    BE->>DB: 2. 重複確認とユーザーセーブ
+    DB-->>BE: 3. セーブ完了
     BE-->>FE: 4. 回答（200 OK / 成功メッセージ）
 ```
 
@@ -35,10 +35,10 @@ sequenceDiagram
     participant BE as Backend 
     participant DB 
 
-    FE->>BE: 1. マイ情報リクエスト (GET /me)
+    FE->>BE: 1. ユーザー情報リクエスト (GET /me)
     BE->>DB: 2. ログイン中のユーザー情報の検索
     DB-->>BE: 3. ユーザーデータの返還
-    BE-->>FE: 4. 応答 (username, firstLogin 등)
+    BE-->>FE: 4. 応答 (username, firstLogin（初回ログイン判定）)
     Note over FE: firstLogin の値に応じて<br/>オンボーディングまたはメインへ移動
 ```
 
@@ -52,7 +52,7 @@ sequenceDiagram
 
     Note over FE, DB: [ステップ1] オンボーディングデータのロード
     FE->>BE: GET /api/onboarding
-    BE->>DB: ランダムアニメーション20個照会
+    BE->>DB: ランダムアニメーション20個サーチ
     DB-->>BE: アニメーションリスト返還
     BE-->>FE: 20個リスト応答 (malId, title, imageUrl)
 
@@ -130,7 +130,7 @@ sequenceDiagram
     Note over FE, EXT: [検索] キーワードおよびフィルター条件を適用
     FE->>BE: GET /api/anime/search（keyword, type, page など）
     BE->>BE: UriComponentsBuilderでクエリ文字列を動的生成
-    BE->>EXT: GET /v4/anime?q=...&page=...
+    BE->>EXT: 外部API(Jikan api)にリクエスト
     EXT-->>BE: アニメ一覧およびページ情報を返却
     
     Note over BE: ロジック：現在ページ基準で<br/>ページグループ（Start〜End）を計算
