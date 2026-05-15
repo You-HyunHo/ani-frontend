@@ -4,6 +4,7 @@
 - 目的：アニメ情報の提供および推薦コミュニティ
 - 開発期間：2026.03.12 ～ 2026.04.30
 - [デプロイリンク](https://ani-frontend-ek9a.onrender.com/)
+  ※ Renderの無料プランを利用しているため、初回アクセス時に読み込みが遅くなる場合があります。
 - [バックエンド GitHub リンク](https://github.com/rlarbtns5898-design/ani)
 
 ## 目次
